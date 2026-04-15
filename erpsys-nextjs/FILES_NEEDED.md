@@ -80,6 +80,8 @@ npm install
 - [ ] Open http://localhost:3000
 - [ ] Test admin login (`admin`/`admin123`)
 - [ ] Test student login (`student001`/`student123`)
+- [ ] Verify route protection (can't access `/admin/dashboard` without login)
+- [ ] Verify chatbot is available after login
 
 ---
 
@@ -192,6 +194,28 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
 ---
 
+## Route Protection ⭐ NEW
+
+### Protected Routes (Require Login)
+- `/admin/*` - All admin pages and APIs (require ADMIN role)
+- `/student/dashboard` - Student dashboard (require STUDENT role)
+- `/student/courses` - View courses (require STUDENT role)
+- `/student/grades` - View grades (require STUDENT role)
+- `/student/profile` - View profile (require STUDENT role)
+
+### Public Routes (No Login Required)
+- `/` - Home portal
+- `/admin/login` - Admin login
+- `/student/login` - Student login
+- `/student/register` - Student registration
+
+### What Happens Without Login
+- Unauthenticated users trying to access protected routes → redirected to home
+- Users already logged in accessing login page → redirected to dashboard
+- Invalid/expired auth token → redirected to home, cookie deleted
+
+---
+
 ## Common Issues & Solutions
 
 ### Error: "Module not found: Can't resolve '@/lib/db'"
@@ -211,16 +235,37 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ### Error: "Port 3000 already in use"
 **Solution:** `npm run dev -- -p 3001`
 
----
+### Error: "Can't access dashboard even after login"
+**Solution:**
+- Check browser cookies contain auth token
+- Check JWT_SECRET in `.env.local` is correct
+- Clear cookies and try logging in again
+
+### Chatbot not appearing
+**Solution:**
+- Make sure you're logged in (dashboard only)
+- Check GROQ_API_KEY is set in `.env.local`
+- Restart dev server
 
 ## Next Steps After Setup
 
 1. ✅ Complete setup from SETUP_GUIDE.md
-2. ✅ Log in with default credentials
-3. ✅ Explore admin dashboard
-4. ✅ Try student dashboard
-5. ✅ Test chatbot on each page
+2. ✅ Verify route protection (try accessing /admin/dashboard without login)
+3. ✅ Log in with default credentials
+4. ✅ Explore admin/student dashboards
+5. ✅ Test chatbot on dashboards
 6. ✅ Create your own users/data
+7. ✅ Deploy to production (see DEPLOYMENT.md)
+
+---
+
+## Documentation Files
+
+**In Repository:**
+- `README.md` - Project overview and features
+- `SETUP_GUIDE.md` - Complete step-by-step setup instructions
+- `DEPLOYMENT.md` - How to deploy to production
+- `FILES_NEEDED.md` - This file
 
 ---
 

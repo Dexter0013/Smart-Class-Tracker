@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import ProtectedPage from "@/components/ProtectedPage";
 
 interface Student {
   id: number;
@@ -51,7 +52,8 @@ export default function AdminStudents() {
   if (loading) return <div className="p-4">Loading...</div>;
 
   return (
-    <div className="p-6">
+    <ProtectedPage requiredRole="ADMIN">
+      <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Manage Students</h1>
         <Link
@@ -107,6 +109,7 @@ export default function AdminStudents() {
       {students.length === 0 && (
         <div className="text-center py-8 text-gray-500">No students found</div>
       )}
-    </div>
+      </div>
+    </ProtectedPage>
   );
 }

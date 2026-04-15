@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import ChatBot from "@/components/ChatBot";
+import ProtectedPage from "@/components/ProtectedPage";
 
 interface Grade {
   courseCode: string;
@@ -55,8 +56,9 @@ export default function StudentGradesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar userType="student" username={username || "Student"} />
+    <ProtectedPage requiredRole="STUDENT">
+      <div className="min-h-screen bg-gray-50">
+        <Navbar userType="student" username={username || "Student"} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">My Grades</h1>
@@ -129,6 +131,7 @@ export default function StudentGradesPage() {
         title="Grades Assistant"
         context="You are helping students understand their grades, assessments, and performance. Answer questions about how grades are calculated, how to improve, and academic progress."
       />
-    </div>
+      </div>
+    </ProtectedPage>
   );
 }

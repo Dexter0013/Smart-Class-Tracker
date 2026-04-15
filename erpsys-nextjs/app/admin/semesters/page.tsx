@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import ProtectedPage from "@/components/ProtectedPage";
 
 interface Semester {
   id: string;
@@ -79,7 +80,8 @@ export default function AdminSemestersPage() {
   if (loading) return <div className="p-4">Loading...</div>;
 
   return (
-    <div className="p-6">
+    <ProtectedPage requiredRole="ADMIN">
+      <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Manage Semesters</h1>
         <button
@@ -184,6 +186,7 @@ export default function AdminSemestersPage() {
       {semesters.length === 0 && (
         <div className="text-center py-8 text-gray-500">No semesters found</div>
       )}
-    </div>
+      </div>
+    </ProtectedPage>
   );
 }

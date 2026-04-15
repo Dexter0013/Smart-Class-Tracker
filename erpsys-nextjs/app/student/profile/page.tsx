@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import ChatBot from "@/components/ChatBot";
+import ProtectedPage from "@/components/ProtectedPage";
 
 interface StudentProfile {
   name: string;
@@ -55,8 +56,9 @@ export default function StudentProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar userType="student" username={username} />
+    <ProtectedPage requiredRole="STUDENT">
+      <div className="min-h-screen bg-gray-50">
+        <Navbar userType="student" username={username} />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">My Profile</h1>
@@ -129,6 +131,7 @@ export default function StudentProfilePage() {
         title="Help Assistant"
         context="You are helping students with account and profile information. Answer questions about their student profile, contact information, and general assistance."
       />
-    </div>
+      </div>
+    </ProtectedPage>
   );
 }

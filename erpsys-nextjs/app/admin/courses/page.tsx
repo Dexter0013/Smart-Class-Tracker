@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import ProtectedPage from "@/components/ProtectedPage";
 
 interface Course {
   id: string;
@@ -110,7 +111,8 @@ export default function AdminCoursesPage() {
   if (loading) return <div className="p-4">Loading...</div>;
 
   return (
-    <div className="p-6">
+    <ProtectedPage requiredRole="ADMIN">
+      <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Manage Courses</h1>
         <button
@@ -232,6 +234,7 @@ export default function AdminCoursesPage() {
       {courses.length === 0 && (
         <div className="text-center py-8 text-gray-500">No courses found</div>
       )}
-    </div>
+      </div>
+    </ProtectedPage>
   );
 }

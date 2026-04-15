@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import ProtectedPage from "@/components/ProtectedPage";
 
 interface Class {
   id: string;
@@ -132,7 +133,8 @@ export default function AdminClassesPage() {
   if (loading) return <div className="p-4">Loading...</div>;
 
   return (
-    <div className="p-6">
+    <ProtectedPage requiredRole="ADMIN">
+      <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Manage Classes</h1>
         <button
@@ -270,6 +272,7 @@ export default function AdminClassesPage() {
       {classes.length === 0 && (
         <div className="text-center py-8 text-gray-500">No classes found</div>
       )}
-    </div>
+      </div>
+    </ProtectedPage>
   );
 }
