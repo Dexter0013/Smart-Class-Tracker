@@ -1,0 +1,134 @@
+{
+  "description": "Routing map for ASTU CSE syllabus PDFs and sources (Semester 3 to 8)",
+  "base_source": "https://astu.ac.in/?page_id=4697",
+
+  "semesters": {
+    "Semester_3": {
+      "pdf": "https://astu.ac.in/wp-content/uploads/3rd-semester-CSE.pdf",
+      "subjects": {
+        "Mathematics III": {
+          "module_ref": "Engineering Mathematics",
+          "pdf": "https://astu.ac.in/wp-content/uploads/3rd-semester-CSE.pdf"
+        },
+        "Object Oriented Programming (C++)": {
+          "module_ref": "OOP Concepts",
+          "pdf": "https://astu.ac.in/wp-content/uploads/3rd-semester-CSE.pdf"
+        },
+        "Digital Systems": {
+          "module_ref": "Digital Logic Design",
+          "pdf": "https://astu.ac.in/wp-content/uploads/3rd-semester-CSE.pdf"
+        },
+        "Data Structures & Algorithms": {
+          "module_ref": "DSA Core",
+          "pdf": "https://astu.ac.in/wp-content/uploads/3rd-semester-CSE.pdf"
+        },
+        "Signals & Systems": {
+          "module_ref": "Signals Processing Basics",
+          "pdf": "https://astu.ac.in/wp-content/uploads/3rd-semester-CSE.pdf"
+        }
+      }
+    },
+
+    "Semester_4": {
+      "pdf": "https://astu.ac.in/wp-content/uploads/4th-semester-CSE.pdf",
+      "subjects": {
+        "Numerical Methods": {
+          "module_ref": "Numerical Computation",
+          "pdf": "https://astu.ac.in/wp-content/uploads/4th-semester-CSE.pdf"
+        },
+        "Graph Theory": {
+          "module_ref": "Graph Algorithms",
+          "pdf": "https://astu.ac.in/wp-content/uploads/4th-semester-CSE.pdf"
+        },
+        "Operating Systems": {
+          "module_ref": "OS Core",
+          "pdf": "https://astu.ac.in/wp-content/uploads/4th-semester-CSE.pdf"
+        },
+        "Computer Organization & Architecture": {
+          "module_ref": "COA",
+          "pdf": "https://astu.ac.in/wp-content/uploads/4th-semester-CSE.pdf"
+        },
+        "Programming Languages": {
+          "module_ref": "Language Theory",
+          "pdf": "https://astu.ac.in/wp-content/uploads/4th-semester-CSE.pdf"
+        }
+      }
+    },
+
+    "Semester_5": {
+      "pdf": "https://astu.ac.in/wp-content/uploads/5th-semester-CSE.pdf",
+      "subjects": {
+        "Probability & Random Processes": {
+          "module_ref": "Probability Theory",
+          "pdf": "https://astu.ac.in/wp-content/uploads/5th-semester-CSE.pdf"
+        },
+        "Formal Language & Automata Theory": {
+          "module_ref": "Automata",
+          "pdf": "https://astu.ac.in/wp-content/uploads/5th-semester-CSE.pdf"
+        },
+        "Computer Graphics": {
+          "module_ref": "Graphics Pipeline",
+          "pdf": "https://astu.ac.in/wp-content/uploads/5th-semester-CSE.pdf"
+        },
+        "Database Management Systems": {
+          "module_ref": "DBMS Core",
+          "pdf": "https://astu.ac.in/wp-content/uploads/5th-semester-CSE.pdf"
+        },
+        "Microprocessor & Microcontroller": {
+          "module_ref": "Microprocessor Architecture",
+          "pdf": "https://astu.ac.in/wp-content/uploads/5th-semester-CSE.pdf"
+        }
+      }
+    },
+
+    "Semester_6": {
+      "pdf": "https://astu.ac.in/wp-content/uploads/6th-semester-CSE.pdf",
+      "subjects": {
+        "Computer Networks": {
+          "module_ref": "Networking",
+          "pdf": "https://astu.ac.in/wp-content/uploads/6th-semester-CSE.pdf"
+        },
+        "Software Engineering": {
+          "module_ref": "SDLC",
+          "pdf": "https://astu.ac.in/wp-content/uploads/6th-semester-CSE.pdf"
+        },
+        "Compiler Design": {
+          "module_ref": "Compilers",
+          "pdf": "https://astu.ac.in/wp-content/uploads/6th-semester-CSE.pdf"
+        }
+      }
+    },
+
+    "Semester_7": {
+      "pdf": "https://astu.ac.in/wp-content/uploads/7th-semester-CSE.pdf",
+      "subjects": {
+        "Cryptography & Information Security": {
+          "module_ref": "Security",
+          "pdf": "https://astu.ac.in/wp-content/uploads/7th-semester-CSE.pdf"
+        },
+        "Electives": {
+          "module_ref": "Specialization",
+          "pdf": "https://astu.ac.in/wp-content/uploads/7th-semester-CSE.pdf"
+        }
+      }
+    },
+
+    "Semester_8": {
+      "pdf": "https://astu.ac.in/wp-content/uploads/8th-SEM-CSE-Final.pdf",
+      "subjects": {
+        "Program Electives": {
+          "module_ref": "Advanced Topics",
+          "pdf": "https://astu.ac.in/wp-content/uploads/8th-SEM-CSE-Final.pdf"
+        },
+        "Open Electives": {
+          "module_ref": "Interdisciplinary",
+          "pdf": "https://astu.ac.in/wp-content/uploads/8th-SEM-CSE-Final.pdf"
+        },
+        "Major Project": {
+          "module_ref": "Capstone",
+          "pdf": "https://astu.ac.in/wp-content/uploads/8th-SEM-CSE-Final.pdf"
+        }
+      }
+    }
+  }
+}

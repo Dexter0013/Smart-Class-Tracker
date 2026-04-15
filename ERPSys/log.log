@@ -1,0 +1,2 @@
+{"action":"edit","table":"students","id":"2","StudentID":"2","Name":"Eva Brown Munda","DateOfBirth":"2001-11-22","Email":"eva.brown@univ.edu","PhoneNumber":"9876543211","EnrollmentDate":"2021-08-01","Major_DepartmentID":"2"}
+{"action":"delete","table":"students","id":"2"}
