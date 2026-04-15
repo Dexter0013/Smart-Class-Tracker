@@ -1,7 +1,7 @@
-import { Role } from "@prisma/client";
+export type Role = "ADMIN" | "STUDENT" | "INSTRUCTOR";
 
 export interface AuthPayload {
-  userId: number;
+  userId: string;
   username: string;
   role: Role;
   iat?: number;
@@ -17,7 +17,7 @@ export interface LoginResponse {
   success: boolean;
   message: string;
   user?: {
-    id: number;
+    id: string;
     username: string;
     email: string;
     role: Role;

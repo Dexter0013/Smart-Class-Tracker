@@ -99,7 +99,7 @@ export default function AdminDashboardPage() {
             Management Tools
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {["students", "instructors", "courses", "departments", "classes", "enrollments"].map(
+            {["students", "instructors", "courses", "departments", "semesters", "classes"].map(
               (item) => (
                 <a
                   key={item}
