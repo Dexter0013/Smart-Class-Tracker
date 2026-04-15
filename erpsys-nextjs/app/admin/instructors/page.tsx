@@ -145,7 +145,7 @@ export default function AdminInstructorsPage() {
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="border p-2 rounded"
+                className="border p-2 rounded text-gray-900 placeholder-gray-500"
               />
               <input
                 type="email"
@@ -153,19 +153,19 @@ export default function AdminInstructorsPage() {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="border p-2 rounded"
+                className="border p-2 rounded text-gray-900 placeholder-gray-500"
               />
               <input
                 type="tel"
                 placeholder="Phone Number"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="border p-2 rounded"
+                className="border p-2 rounded text-gray-900 placeholder-gray-500"
               />
               <select
                 value={formData.departmentId}
                 onChange={(e) => setFormData({ ...formData, departmentId: e.target.value })}
-                className="border p-2 rounded"
+                className="border p-2 rounded text-gray-900"
                 required
               >
                 <option value="">Select Department</option>
@@ -183,7 +183,7 @@ export default function AdminInstructorsPage() {
                     required
                     value={formData.username}
                     onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                    className="border p-2 rounded"
+                    className="border p-2 rounded text-gray-900 placeholder-gray-500"
                   />
                   <input
                     type="password"
@@ -191,7 +191,7 @@ export default function AdminInstructorsPage() {
                     required
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                    className="border p-2 rounded"
+                    className="border p-2 rounded text-gray-900 placeholder-gray-500"
                   />
                 </>
               )}

@@ -140,7 +140,7 @@ export default function AdminCoursesPage() {
                 required
                 value={formData.courseCode}
                 onChange={(e) => setFormData({ ...formData, courseCode: e.target.value })}
-                className="border p-2 rounded"
+                className="border p-2 rounded text-gray-900 placeholder-gray-500"
               />
               <input
                 type="text"
@@ -148,7 +148,7 @@ export default function AdminCoursesPage() {
                 required
                 value={formData.courseName}
                 onChange={(e) => setFormData({ ...formData, courseName: e.target.value })}
-                className="border p-2 rounded"
+                className="border p-2 rounded text-gray-900 placeholder-gray-500"
               />
               <input
                 type="number"
@@ -158,12 +158,12 @@ export default function AdminCoursesPage() {
                 max="4"
                 value={formData.credits}
                 onChange={(e) => setFormData({ ...formData, credits: e.target.value })}
-                className="border p-2 rounded"
+                className="border p-2 rounded text-gray-900 placeholder-gray-500"
               />
               <select
                 value={formData.departmentId}
                 onChange={(e) => setFormData({ ...formData, departmentId: e.target.value })}
-                className="border p-2 rounded"
+                className="border p-2 rounded text-gray-900"
                 required
               >
                 <option value="">Select Department</option>

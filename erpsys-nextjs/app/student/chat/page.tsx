@@ -158,7 +158,7 @@ export default function StudentChatPage() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask your question here..."
                 disabled={loading}
-                className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600"
+                className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600 text-gray-900 placeholder-gray-500"
               />
               <button
                 type="submit"

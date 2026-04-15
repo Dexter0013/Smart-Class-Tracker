@@ -165,7 +165,7 @@ export default function AdminClassesPage() {
               <select
                 value={formData.courseId}
                 onChange={(e) => setFormData({ ...formData, courseId: e.target.value })}
-                className="border p-2 rounded"
+                className="border p-2 rounded text-gray-900"
                 required
               >
                 <option value="">Select Course</option>
@@ -178,7 +178,7 @@ export default function AdminClassesPage() {
               <select
                 value={formData.instructorId}
                 onChange={(e) => setFormData({ ...formData, instructorId: e.target.value })}
-                className="border p-2 rounded"
+                className="border p-2 rounded text-gray-900"
                 required
               >
                 <option value="">Select Instructor</option>
@@ -191,7 +191,7 @@ export default function AdminClassesPage() {
               <select
                 value={formData.semesterId}
                 onChange={(e) => setFormData({ ...formData, semesterId: e.target.value })}
-                className="border p-2 rounded"
+                className="border p-2 rounded text-gray-900"
                 required
               >
                 <option value="">Select Semester</option>
@@ -206,14 +206,14 @@ export default function AdminClassesPage() {
                 placeholder="Location (e.g., Room 101)"
                 value={formData.location}
                 onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                className="border p-2 rounded"
+                className="border p-2 rounded text-gray-900 placeholder-gray-500"
               />
               <input
                 type="text"
                 placeholder="Schedule (e.g., Mon, Wed 10:00-11:00)"
                 value={formData.schedule}
                 onChange={(e) => setFormData({ ...formData, schedule: e.target.value })}
-                className="border p-2 rounded col-span-2"
+                className="border p-2 rounded col-span-2 text-gray-900 placeholder-gray-500"
               />
             </div>
             <div className="flex gap-2 mt-4">

@@ -90,7 +90,7 @@ export default function AdminDepartments() {
             placeholder="Department Name"
             value={newDept}
             onChange={(e) => setNewDept(e.target.value)}
-            className="flex-1 px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="flex-1 px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-teal-500 text-gray-900 placeholder-gray-500"
             required
           />
           <button

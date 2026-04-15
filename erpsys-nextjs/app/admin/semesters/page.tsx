@@ -109,7 +109,7 @@ export default function AdminSemestersPage() {
                 required
                 value={formData.semesterName}
                 onChange={(e) => setFormData({ ...formData, semesterName: e.target.value })}
-                className="border p-2 rounded"
+                className="border p-2 rounded text-gray-900 placeholder-gray-500"
               />
               <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -119,7 +119,7 @@ export default function AdminSemestersPage() {
                     required
                     value={formData.startDate}
                     onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
-                    className="border p-2 rounded w-full"
+                    className="border p-2 rounded w-full text-gray-900"
                   />
                 </div>
                 <div>
@@ -129,7 +129,7 @@ export default function AdminSemestersPage() {
                     required
                     value={formData.endDate}
                     onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
-                    className="border p-2 rounded w-full"
+                    className="border p-2 rounded w-full text-gray-900"
                   />
                 </div>
               </div>
