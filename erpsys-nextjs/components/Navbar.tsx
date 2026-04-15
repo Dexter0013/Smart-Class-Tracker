@@ -39,8 +39,8 @@ export default function Navbar({ userType, username }: NavbarProps) {
         ];
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="bg-white shadow-md fixed top-0 left-0 right-0 z-50 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex justify-between items-center h-16">
           <Link
             href={userType === "admin" ? "/admin/dashboard" : "/student/dashboard"}
@@ -76,9 +76,9 @@ export default function Navbar({ userType, username }: NavbarProps) {
           <div className="relative hidden sm:block">
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-semibold text-gray-700 hover:text-teal-600 hover:bg-gray-50 transition"
+              className="flex items-center space-x-2 px-3 py-2 rounded-md text-xs sm:text-sm font-semibold text-gray-700 hover:text-teal-600 hover:bg-gray-50 transition whitespace-nowrap min-w-max"
             >
-              <span>{username}</span>
+              <span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-xs">{username}</span>
               <svg
                 className={`w-4 h-4 transform transition ${
                   isDropdownOpen ? "rotate-180" : ""
@@ -121,9 +121,11 @@ export default function Navbar({ userType, username }: NavbarProps) {
           <div className="sm:hidden relative">
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="p-2 rounded-md text-gray-700 hover:bg-gray-50"
+              className="flex items-center space-x-1 px-2 py-2 rounded-md text-xs font-semibold text-gray-700 hover:text-teal-600 hover:bg-gray-50 transition"
+              title={username}
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[100px]">{username}</span>
+              <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
             </button>

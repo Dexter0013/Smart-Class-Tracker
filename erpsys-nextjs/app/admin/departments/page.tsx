@@ -82,7 +82,7 @@ export default function AdminDepartments() {
 
   return (
     <ProtectedPage requiredRole="ADMIN">
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 pt-20">
         <Navbar userType="admin" username="Admin" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -135,7 +135,7 @@ export default function AdminDepartments() {
           <tbody>
             {departments.map((dept) => (
               <tr key={dept.id} className="border-t hover:bg-gray-50">
-                <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-900 min-w-max">{dept.departmentName}</td>
+                <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-900 min-w-max whitespace-nowrap">{dept.departmentName}</td>
                 <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-900">{dept._count?.students || 0}</td>
                 <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-900">{dept._count?.instructors || 0}</td>
                 <td className="px-3 sm:px-6 py-3 sm:py-4">

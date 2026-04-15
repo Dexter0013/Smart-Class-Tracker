@@ -92,7 +92,7 @@ export default function AdminSemestersPage() {
 
   return (
     <ProtectedPage requiredRole="ADMIN">
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 pt-20">
         <Navbar userType="admin" username="Admin" />
 
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-12">
@@ -180,7 +180,7 @@ export default function AdminSemestersPage() {
           <tbody>
             {semesters.map((semester) => (
               <tr key={semester.id} className="border-t hover:bg-gray-50">
-                <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 min-w-max">{semester.semesterName}</td>
+                <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 min-w-max whitespace-nowrap">{semester.semesterName}</td>
                 <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900">{new Date(semester.startDate).toLocaleDateString()}</td>
                 <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 hidden sm:table-cell">{new Date(semester.endDate).toLocaleDateString()}</td>
                 <td className="px-2 sm:px-6 py-3 sm:py-4 flex gap-1 sm:gap-2">

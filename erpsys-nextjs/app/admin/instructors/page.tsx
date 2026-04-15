@@ -124,7 +124,7 @@ export default function AdminInstructorsPage() {
 
   return (
     <ProtectedPage requiredRole="ADMIN">
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 pt-20">
         <Navbar userType="admin" username="Admin" />
 
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-12">
@@ -246,7 +246,7 @@ export default function AdminInstructorsPage() {
           <tbody>
             {instructors.map((instructor) => (
               <tr key={instructor.id} className="border-t hover:bg-gray-50">
-                <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 font-semibold min-w-max">{instructor.name}</td>
+                <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 font-semibold min-w-max whitespace-nowrap">{instructor.name}</td>
                 <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 hidden sm:table-cell text-xs">{instructor.email}</td>
                 <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 hidden md:table-cell">{instructor.phone || "-"}</td>
                 <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 hidden lg:table-cell">{instructor.department.departmentName}</td>

@@ -57,7 +57,7 @@ export default function StudentGradesPage() {
 
   return (
     <ProtectedPage requiredRole="STUDENT">
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 pt-20">
         <Navbar userType="student" username={username || "Student"} />
 
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-12">
@@ -88,7 +88,7 @@ export default function StudentGradesPage() {
               <tbody>
                 {grades.map((grade, index) => (
                   <tr key={index} className="border-b hover:bg-gray-50">
-                    <td className="px-2 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm">
+                    <td className="px-2 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm min-w-max whitespace-nowrap">
                       <div className="font-semibold text-gray-900">
                         {grade.courseCode}
                       </div>

@@ -147,7 +147,7 @@ export default function AdminClassesPage() {
 
   return (
     <ProtectedPage requiredRole="ADMIN">
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 pt-20">
         <Navbar userType="admin" username="Admin" />
 
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-12">
@@ -266,8 +266,8 @@ export default function AdminClassesPage() {
           <tbody>
             {classes.map((cls) => (
               <tr key={cls.id} className="border-t hover:bg-gray-50">
-                <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 font-semibold min-w-max">{cls.course.courseCode} - {cls.course.courseName}</td>
-                <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 hidden sm:table-cell min-w-max">{cls.instructor.name}</td>
+                <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 font-semibold min-w-max whitespace-nowrap">{cls.course.courseCode} - {cls.course.courseName}</td>
+                <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 hidden sm:table-cell min-w-max whitespace-nowrap">{cls.instructor.name}</td>
                 <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 hidden md:table-cell">{cls.semester.semesterName}</td>
                 <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 hidden lg:table-cell">{cls.location || "-"}</td>
                 <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 hidden lg:table-cell">{cls.schedule || "-"}</td>
