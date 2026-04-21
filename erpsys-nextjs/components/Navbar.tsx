@@ -27,9 +27,16 @@ export default function Navbar({ userType, username }: NavbarProps) {
     userType === "admin"
       ? [
           { href: "/admin/dashboard", label: "Dashboard" },
-          { href: "/admin/students", label: "Students" },
+          { href: "/admin/users", label: "Users" },
+          { href: "/admin/departments", label: "Departments" },
+          { href: "/admin/semesters", label: "Semesters" },
           { href: "/admin/instructors", label: "Instructors" },
           { href: "/admin/courses", label: "Courses" },
+          { href: "/admin/classes", label: "Classes" },
+          { href: "/admin/students", label: "Students" },
+          { href: "/admin/enrollments", label: "Enrollments" },
+          { href: "/admin/assessments", label: "Assessments" },
+          { href: "/admin/studentmarks", label: "Marks" },
         ]
       : [
           { href: "/student/dashboard", label: "Dashboard" },

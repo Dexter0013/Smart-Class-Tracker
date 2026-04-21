@@ -4,6 +4,10 @@ import {
   resolveAdminApiContext,
   resolveAdminTableModel,
 } from "@/lib/admin-api-context";
+import {
+  adminDynamicIncludes,
+  transformAdminBody,
+} from "@/lib/admin-dynamic-config";
 
 export async function GET(
   request: NextRequest,
@@ -22,17 +26,21 @@ export async function GET(
     }
     const { model } = modelResult;
 
-    const data = await (prisma[model] as any).findMany({
-      take: 50,
+    let data = await (prisma[model] as any).findMany({
+      take: 100,
+      include: adminDynamicIncludes[model] || undefined,
     });
 
-    return NextResponse.json({
-      success: true,
-      data,
-      count: data.length,
-    });
+    if (model === "user") {
+      data = data.map((item: any) => {
+        const { passwordHash, ...safeItem } = item;
+        return safeItem;
+      });
+    }
+
+    return NextResponse.json(data);
   } catch (error) {
-    console.error("CRUD read error:", error);
+    console.error(`CRUD ${await params.then(p=>p.table)} read error:`, error);
     return NextResponse.json(
       { success: false, message: "Internal server error" },
       { status: 500 },
@@ -57,22 +65,23 @@ export async function POST(
     }
     const { model } = modelResult;
 
-    const body = await request.json();
+    const rawBody = await request.json();
+    const parsedBody = transformAdminBody(model as string, rawBody);
 
     const data = await (prisma[model] as any).create({
-      data: body,
+      data: parsedBody,
+      include: adminDynamicIncludes[model] || undefined,
     });
 
-    return NextResponse.json(
-      {
-        success: true,
-        data,
-        message: "Record created successfully",
-      },
-      { status: 201 },
-    );
-  } catch (error) {
-    console.error("CRUD create error:", error);
+    return NextResponse.json(data, { status: 201 });
+  } catch (error: any) {
+    console.error(`CRUD ${await params.then(p=>p.table)} create error:`, error);
+    if (error.code === "P2002") {
+      return NextResponse.json(
+        { success: false, message: "Unique constraint failed. Record already exists." },
+        { status: 400 }
+      );
+    }
     return NextResponse.json(
       { success: false, message: "Internal server error" },
       { status: 500 },

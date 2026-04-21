@@ -20,6 +20,12 @@ export default function ChatBot({
   title = "Chat Assistant",
   className = "",
 }: ChatBotProps) {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -166,10 +172,10 @@ export default function ChatBot({
             >
               <p className="text-sm">{message.content}</p>
               <span className="text-xs opacity-70 mt-1 block">
-                {message.timestamp.toLocaleTimeString([], {
+                {isMounted ? message.timestamp.toLocaleTimeString([], {
                   hour: "2-digit",
                   minute: "2-digit",
-                })}
+                }) : ""}
               </span>
             </div>
           </div>

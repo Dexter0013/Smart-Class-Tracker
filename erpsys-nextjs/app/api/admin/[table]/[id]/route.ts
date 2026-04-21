@@ -4,6 +4,10 @@ import {
   resolveAdminApiContext,
   resolveAdminTableModel,
 } from "@/lib/admin-api-context";
+import {
+  adminDynamicIncludes,
+  transformAdminBody,
+} from "@/lib/admin-dynamic-config";
 
 export async function PUT(
   request: NextRequest,
@@ -22,20 +26,18 @@ export async function PUT(
     }
     const { model } = modelResult;
 
-    const body = await request.json();
+    const rawBody = await request.json();
+    const parsedBody = transformAdminBody(model as string, rawBody);
 
     const data = await (prisma[model] as any).update({
       where: { id },
-      data: body,
+      data: parsedBody,
+      include: adminDynamicIncludes[model] || undefined,
     });
 
-    return NextResponse.json({
-      success: true,
-      data,
-      message: "Record updated successfully",
-    });
+    return NextResponse.json(data);
   } catch (error) {
-    console.error("CRUD update error:", error);
+    console.error(`CRUD ${await params.then(p=>p.table)} update error:`, error);
     return NextResponse.json(
       { success: false, message: "Internal server error" },
       { status: 500 },
@@ -64,12 +66,9 @@ export async function DELETE(
       where: { id },
     });
 
-    return NextResponse.json({
-      success: true,
-      message: "Record deleted successfully",
-    });
+    return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("CRUD delete error:", error);
+    console.error(`CRUD ${await params.then(p=>p.table)} delete error:`, error);
     return NextResponse.json(
       { success: false, message: "Internal server error" },
       { status: 500 },

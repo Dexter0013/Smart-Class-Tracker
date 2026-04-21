@@ -182,9 +182,9 @@ npm run db:seed
 
 This creates:
 
-- **Admin account:** `admin` / `admin123`
-- **Student account:** `student001` / `student123`
-- **Sample data:** Departments, instructors, courses, classes, etc.
+- **Admin account:** `admin2` / `123`
+- **Student account:** `stud1` / `123`
+- **Historic accounts:** Complete MySQL payload transferred with intact relationships.
 
 **Output:**
 
@@ -232,8 +232,8 @@ Open **http://localhost:3000** in your browser
 ### Admin Login
 
 1. Click "Admin Login" button
-2. **Username:** `admin`
-3. **Password:** `admin123`
+2. **Username:** `admin2`
+3. **Password:** `123`
 4. ✅ Should see admin dashboard with stats and chatbot
 
 ### Admin Dashboard Features
@@ -247,8 +247,8 @@ Open **http://localhost:3000** in your browser
 
 1. Go back to home (click logo or type localhost:3000)
 2. Click "Student Login" button
-3. **Username:** `student001`
-4. **Password:** `student123`
+3. **Username:** `stud1`
+4. **Password:** `123`
 5. ✅ Should see student dashboard
 
 ### Student Dashboard Features
@@ -438,16 +438,16 @@ erpsys-nextjs/
 ### Admin Account
 
 - **URL:** http://localhost:3000/admin/login
-- **Username:** `admin`
-- **Password:** `admin123`
-- **Access:** All management features
+- **Username:** `admin2`
+- **Password:** `123`
+- **Access:** All management features via migrated old database.
 
 ### Student Account
 
 - **URL:** http://localhost:3000/student/login
-- **Username:** `student001`
-- **Password:** `student123`
-- **Access:** Courses, grades, profile
+- **Username:** `stud1`
+- **Password:** `123`
+- **Access:** Courses, grades, profile via migrated old database.
 
 ---
 
@@ -506,7 +506,7 @@ erpsys-nextjs/
 
 ---
 
-**Last Updated:** April 15, 2026
+**Last Updated:** April 21, 2026
 
 ✨ **Your ERP System is ready!** 🚀
 

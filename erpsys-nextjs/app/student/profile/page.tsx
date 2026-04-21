@@ -95,10 +95,10 @@ export default function StudentProfilePage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
                 <div>
                   <h3 className="text-xs sm:text-sm font-semibold text-gray-600 mb-1">
-                    Department ID
+                    Department
                   </h3>
                   <p className="text-base sm:text-lg font-semibold text-gray-900">
-                    {profile.departmentId}
+                    {(profile as any).department?.departmentName || profile.departmentId}
                   </p>
                 </div>
 

@@ -13,7 +13,7 @@ export async function GET(_request: NextRequest) {
       where: { id: context.studentId },
       include: {
         department: true,
-        user: true,
+        user: { select: { id: true, username: true, email: true, role: true, createdAt: true } },
       },
     });
 

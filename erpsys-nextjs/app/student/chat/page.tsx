@@ -24,6 +24,11 @@ export default function StudentChatPage() {
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -135,10 +140,10 @@ export default function StudentChatPage() {
                     {message.content}
                   </p>
                   <span className="text-xs opacity-70 mt-2 block">
-                    {message.timestamp.toLocaleTimeString([], {
+                    {isMounted ? message.timestamp.toLocaleTimeString([], {
                       hour: "2-digit",
                       minute: "2-digit",
-                    })}
+                    }) : ""}
                   </span>
                 </div>
               </div>
