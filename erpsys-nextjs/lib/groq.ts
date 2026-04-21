@@ -15,7 +15,10 @@ export interface ChatResponse {
   error?: string;
 }
 
-export async function chat(messages: ChatMessage[], context?: string): Promise<string> {
+export async function chat(
+  messages: ChatMessage[],
+  context?: string,
+): Promise<string> {
   try {
     const systemPrompt = context
       ? `You are a helpful educational assistant for a Smart Class Tracker ERP system. ${context}`
@@ -24,10 +27,7 @@ export async function chat(messages: ChatMessage[], context?: string): Promise<s
         Provide clear, concise, and helpful responses.`;
 
     const completion = await groq.chat.completions.create({
-      messages: [
-        { role: "system", content: systemPrompt },
-        ...messages,
-      ],
+      messages: [{ role: "system", content: systemPrompt }, ...messages],
       model: process.env.GROQ_MODEL || "mixtral-8x7b-32768",
       temperature: 0.7,
       max_tokens: 1024,
@@ -48,7 +48,7 @@ export async function chat(messages: ChatMessage[], context?: string): Promise<s
 export async function generateContextualResponse(
   userMessage: string,
   userType: "student" | "admin",
-  context: string
+  context: string,
 ): Promise<string> {
   const systemContext = `${context}
     The user is a ${userType}.
@@ -62,6 +62,6 @@ export async function generateContextualResponse(
         content: userMessage,
       },
     ],
-    systemContext
+    systemContext,
   );
 }

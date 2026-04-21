@@ -40,7 +40,8 @@ export default function LoginForm({ userType }: LoginFormProps) {
       }
 
       // Redirect to dashboard
-      const dashboardPath = userType === "admin" ? "/admin/dashboard" : "/student/dashboard";
+      const dashboardPath =
+        userType === "admin" ? "/admin/dashboard" : "/student/dashboard";
       router.push(dashboardPath);
     } catch (err) {
       setError("An error occurred. Please try again.");
@@ -131,7 +132,10 @@ export default function LoginForm({ userType }: LoginFormProps) {
           )}
 
           <div className="mt-6 pt-6 border-t border-gray-200 text-center">
-            <Link href="/" className="text-teal-600 hover:text-teal-700 text-sm">
+            <Link
+              href="/"
+              className="text-teal-600 hover:text-teal-700 text-sm"
+            >
               Back to Home
             </Link>
           </div>

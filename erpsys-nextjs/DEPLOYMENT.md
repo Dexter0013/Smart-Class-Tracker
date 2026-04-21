@@ -73,6 +73,7 @@ npm run db:seed
 ```
 
 **Default Credentials:**
+
 - Admin: `username: admin` | `password: admin123`
 - Student: `username: student001` | `password: student123`
 
@@ -145,16 +146,17 @@ docker run -p 3000:3000 \
 
 The admin panel includes full CRUD functionality for all core entities:
 
-| Page | Features | Status |
-|------|----------|--------|
-| **Students** | Add, Edit, Delete students with password hashing | ✅ Complete |
-| **Courses** | Add, Edit, Delete courses with department selection | ✅ Complete |
-| **Departments** | Add, Edit, Delete departments with user counts | ✅ Complete |
-| **Instructors** | Add, Edit, Delete instructors with department assignment | ✅ Complete |
-| **Semesters** | Add, Edit, Delete semesters with date ranges | ✅ Complete |
-| **Classes** | Add, Edit, Delete classes with course/instructor/semester linking | ✅ Complete |
+| Page            | Features                                                          | Status      |
+| --------------- | ----------------------------------------------------------------- | ----------- |
+| **Students**    | Add, Edit, Delete students with password hashing                  | ✅ Complete |
+| **Courses**     | Add, Edit, Delete courses with department selection               | ✅ Complete |
+| **Departments** | Add, Edit, Delete departments with user counts                    | ✅ Complete |
+| **Instructors** | Add, Edit, Delete instructors with department assignment          | ✅ Complete |
+| **Semesters**   | Add, Edit, Delete semesters with date ranges                      | ✅ Complete |
+| **Classes**     | Add, Edit, Delete classes with course/instructor/semester linking | ✅ Complete |
 
 All pages include:
+
 - Responsive tables (responsive column hiding on mobile)
 - Inline form editing with add/edit/cancel functionality
 - Consistent button styling (Edit in blue, Delete in red)

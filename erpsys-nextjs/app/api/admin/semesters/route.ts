@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
-import { authenticateAdmin } from "@/lib/auth";
+import { adminFailure, resolveAdminApiContext } from "@/lib/admin-api-context";
 
 export async function GET(req: NextRequest) {
   try {
-    const user = await authenticateAdmin(req);
-    if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const context = await resolveAdminApiContext(req);
+    if (!context.ok) return context.response;
 
     const semesters = await prisma.semester.findMany({
       orderBy: { semesterName: "asc" },
@@ -13,14 +13,14 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(semesters);
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch semesters" }, { status: 500 });
+    return adminFailure("Failed to fetch semesters");
   }
 }
 
 export async function POST(req: NextRequest) {
   try {
-    const user = await authenticateAdmin(req);
-    if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const context = await resolveAdminApiContext(req);
+    if (!context.ok) return context.response;
 
     const body = await req.json();
     const { semesterName, startDate, endDate } = body;
@@ -36,6 +36,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(semester, { status: 201 });
   } catch (error) {
     console.error("Error creating semester:", error);
-    return NextResponse.json({ error: "Failed to create semester" }, { status: 500 });
+    return adminFailure("Failed to create semester");
   }
 }

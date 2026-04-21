@@ -7,13 +7,13 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(
       { success: true, message: "Logged out successfully" },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("Logout error:", error);
     return NextResponse.json(
       { success: false, message: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

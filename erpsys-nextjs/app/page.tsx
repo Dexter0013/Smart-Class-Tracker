@@ -13,8 +13,8 @@ export default function Home() {
             Educational Resource Planning System
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Streamline academic operations with our comprehensive student management and course
-            administration platform.
+            Streamline academic operations with our comprehensive student
+            management and course administration platform.
           </p>
         </div>
 
@@ -37,8 +37,12 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h2 className="text-2xl font-bold text-gray-900">Administrator</h2>
-              <p className="text-gray-600 mt-2">Manage students, courses, and faculty</p>
+              <h2 className="text-2xl font-bold text-gray-900">
+                Administrator
+              </h2>
+              <p className="text-gray-600 mt-2">
+                Manage students, courses, and faculty
+              </p>
             </div>
 
             <ul className="space-y-2 mb-6 text-sm text-gray-600">
@@ -83,7 +87,9 @@ export default function Home() {
                 </svg>
               </div>
               <h2 className="text-2xl font-bold text-gray-900">Student</h2>
-              <p className="text-gray-600 mt-2">Access courses and view your academic records</p>
+              <p className="text-gray-600 mt-2">
+                Access courses and view your academic records
+              </p>
             </div>
 
             <ul className="space-y-2 mb-6 text-sm text-gray-600">
@@ -111,22 +117,32 @@ export default function Home() {
         </div>
 
         <div className="mt-16 text-center">
-          <h3 className="text-2xl font-bold text-gray-900 mb-8">Key Features</h3>
+          <h3 className="text-2xl font-bold text-gray-900 mb-8">
+            Key Features
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
               <div className="text-3xl mb-2">📚</div>
               <h4 className="font-semibold text-gray-900">Course Management</h4>
-              <p className="text-sm text-gray-600 mt-2">Organize and manage courses efficiently</p>
+              <p className="text-sm text-gray-600 mt-2">
+                Organize and manage courses efficiently
+              </p>
             </div>
             <div className="text-center">
               <div className="text-3xl mb-2">📊</div>
-              <h4 className="font-semibold text-gray-900">Performance Tracking</h4>
-              <p className="text-sm text-gray-600 mt-2">Monitor grades and academic progress</p>
+              <h4 className="font-semibold text-gray-900">
+                Performance Tracking
+              </h4>
+              <p className="text-sm text-gray-600 mt-2">
+                Monitor grades and academic progress
+              </p>
             </div>
             <div className="text-center">
               <div className="text-3xl mb-2">🔒</div>
               <h4 className="font-semibold text-gray-900">Secure Access</h4>
-              <p className="text-sm text-gray-600 mt-2">Protected login for all users</p>
+              <p className="text-sm text-gray-600 mt-2">
+                Protected login for all users
+              </p>
             </div>
           </div>
         </div>

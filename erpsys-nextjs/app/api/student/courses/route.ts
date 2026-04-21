@@ -1,31 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAuthUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import { resolveStudentApiContext } from "@/lib/student-api-context";
 
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
-    const user = await getAuthUser();
-
-    if (!user || user.role !== "STUDENT") {
-      return NextResponse.json(
-        { success: false, message: "Unauthorized" },
-        { status: 401 }
-      );
-    }
-
-    const student = await prisma.student.findUnique({
-      where: { userId: user.userId },
-    });
-
-    if (!student) {
-      return NextResponse.json(
-        { success: false, message: "Student not found" },
-        { status: 404 }
-      );
+    const context = await resolveStudentApiContext();
+    if (!context.ok) {
+      return context.response;
     }
 
     const enrollments = await prisma.enrollment.findMany({
-      where: { studentId: student.id },
+      where: { studentId: context.studentId },
       include: {
         class: {
           include: {
@@ -55,7 +40,7 @@ export async function GET(request: NextRequest) {
     console.error("Courses fetch error:", error);
     return NextResponse.json(
       { success: false, message: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

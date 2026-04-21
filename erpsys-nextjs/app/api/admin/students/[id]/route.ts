@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
-import { authenticateAdmin } from "@/lib/auth";
+import { adminFailure, resolveAdminApiContext } from "@/lib/admin-api-context";
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    const user = await authenticateAdmin(req);
-    if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const context = await resolveAdminApiContext(req);
+    if (!context.ok) return context.response;
 
     const { id } = await params;
 
@@ -21,8 +21,8 @@ export async function DELETE(
   } catch (error: any) {
     console.error("Error deleting student:", error);
     if (error.code === "P2025") {
-      return NextResponse.json({ error: "Student not found" }, { status: 404 });
+      return adminFailure("Student not found", 404);
     }
-    return NextResponse.json({ error: "Failed to delete student" }, { status: 500 });
+    return adminFailure("Failed to delete student");
   }
 }

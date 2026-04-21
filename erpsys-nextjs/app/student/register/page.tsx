@@ -199,7 +199,9 @@ export default function StudentRegisterPage() {
           </form>
 
           <div className="mt-6 pt-6 border-t border-gray-200 text-center">
-            <p className="text-gray-600 text-sm mb-2">Already have an account?</p>
+            <p className="text-gray-600 text-sm mb-2">
+              Already have an account?
+            </p>
             <Link
               href="/student/login"
               className="text-teal-600 hover:text-teal-700 font-semibold"

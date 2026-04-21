@@ -112,7 +112,9 @@ export default function StudentChatPage() {
           {/* Header */}
           <div className="bg-teal-600 text-white p-6">
             <h1 className="text-2xl font-bold">Educational Assistant</h1>
-            <p className="text-teal-100 mt-1">Ask questions about your courses and get help with your studies</p>
+            <p className="text-teal-100 mt-1">
+              Ask questions about your courses and get help with your studies
+            </p>
           </div>
 
           {/* Messages */}
@@ -129,7 +131,9 @@ export default function StudentChatPage() {
                       : "bg-gray-200 text-gray-900 rounded-bl-none"
                   }`}
                 >
-                  <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                  <p className="text-sm whitespace-pre-wrap">
+                    {message.content}
+                  </p>
                   <span className="text-xs opacity-70 mt-2 block">
                     {message.timestamp.toLocaleTimeString([], {
                       hour: "2-digit",
@@ -181,15 +185,21 @@ export default function StudentChatPage() {
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-white p-4 rounded-lg shadow">
             <h3 className="font-bold text-teal-600 mb-2">💡 Tip</h3>
-            <p className="text-sm text-gray-600">Ask about your courses and their content</p>
+            <p className="text-sm text-gray-600">
+              Ask about your courses and their content
+            </p>
           </div>
           <div className="bg-white p-4 rounded-lg shadow">
             <h3 className="font-bold text-teal-600 mb-2">📚 Study Help</h3>
-            <p className="text-sm text-gray-600">Request explanations and study guidance</p>
+            <p className="text-sm text-gray-600">
+              Request explanations and study guidance
+            </p>
           </div>
           <div className="bg-white p-4 rounded-lg shadow">
             <h3 className="font-bold text-teal-600 mb-2">❓ Questions</h3>
-            <p className="text-sm text-gray-600">Ask questions about assignments and grades</p>
+            <p className="text-sm text-gray-600">
+              Ask questions about assignments and grades
+            </p>
           </div>
         </div>
       </div>

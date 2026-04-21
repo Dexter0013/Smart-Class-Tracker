@@ -4,7 +4,9 @@ import { createJWT } from "@/lib/auth";
 import { LoginRequest, LoginResponse } from "@/lib/types";
 import bcrypt from "bcryptjs";
 
-export async function POST(request: NextRequest): Promise<NextResponse<LoginResponse>> {
+export async function POST(
+  request: NextRequest,
+): Promise<NextResponse<LoginResponse>> {
   try {
     const body: LoginRequest = await request.json();
     const { username, password } = body;
@@ -12,7 +14,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<LoginResp
     if (!username || !password) {
       return NextResponse.json(
         { success: false, message: "Username and password are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -24,7 +26,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<LoginResp
     if (!user || user.role !== "ADMIN") {
       return NextResponse.json(
         { success: false, message: "Invalid credentials" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -35,7 +37,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<LoginResp
       if (password !== user.passwordHash) {
         return NextResponse.json(
           { success: false, message: "Invalid credentials" },
-          { status: 401 }
+          { status: 401 },
         );
       }
     }
@@ -58,7 +60,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<LoginResp
           role: user.role,
         },
       },
-      { status: 200 }
+      { status: 200 },
     );
 
     // Set secure HTTP-only cookie
@@ -74,7 +76,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<LoginResp
     console.error("Login error:", error);
     return NextResponse.json(
       { success: false, message: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

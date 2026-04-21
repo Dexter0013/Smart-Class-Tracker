@@ -3,9 +3,11 @@
 ## Files NOT in Repository (User Must Create)
 
 ### 1. `.env.local` (CRITICAL)
+
 **What it is:** Environment configuration file with sensitive data
 **Why it's not in repo:** Security - contains API keys and database passwords
 **How to create:**
+
 ```bash
 touch .env.local  # Mac/Linux
 # or
@@ -13,6 +15,7 @@ echo. > .env.local  # Windows
 ```
 
 **What to add:**
+
 ```
 DATABASE_URL=mongodb+srv://...
 JWT_SECRET=your-generated-secret
@@ -22,9 +25,11 @@ GROQ_API_KEY=your-groq-key
 ---
 
 ### 2. `node_modules/` Directory
+
 **What it is:** All npm packages and dependencies
 **Why it's not in repo:** Too large (~500MB+), easily regenerated
 **How to create:**
+
 ```bash
 npm install
 ```
@@ -32,6 +37,7 @@ npm install
 ---
 
 ### 3. `.env` (Optional Override)
+
 **What it is:** Additional environment variables
 **Why optional:** `.env.local` takes priority in development
 **How to create:** Same as `.env.local`
@@ -40,30 +46,33 @@ npm install
 
 ## External Services/Accounts Required
 
-| Service | Required? | Sign Up | Free? |
-|---------|-----------|---------|-------|
-| MongoDB Atlas | ✅ YES | https://www.mongodb.com/cloud/atlas | ✅ Yes (free tier) |
-| Groq API | ✅ YES | https://console.groq.com | ✅ Yes (free tier) |
-| Node.js | ✅ YES | https://nodejs.org | ✅ Yes |
-| GitHub (optional) | ⭕ For deployment | https://github.com | ✅ Yes |
-| Vercel (optional) | ⭕ For hosting | https://vercel.com | ✅ Yes (free tier) |
+| Service           | Required?         | Sign Up                             | Free?              |
+| ----------------- | ----------------- | ----------------------------------- | ------------------ |
+| MongoDB Atlas     | ✅ YES            | https://www.mongodb.com/cloud/atlas | ✅ Yes (free tier) |
+| Groq API          | ✅ YES            | https://console.groq.com            | ✅ Yes (free tier) |
+| Node.js           | ✅ YES            | https://nodejs.org                  | ✅ Yes             |
+| GitHub (optional) | ⭕ For deployment | https://github.com                  | ✅ Yes             |
+| Vercel (optional) | ⭕ For hosting    | https://vercel.com                  | ✅ Yes (free tier) |
 
 ---
 
 ## Full Setup Checklist
 
 ### ☐ Prerequisites
+
 - [ ] Node.js v18+ installed
 - [ ] npm v9+ installed
 - [ ] Git installed
 - [ ] Code editor (VS Code, webstorm, etc.)
 
 ### ☐ External Accounts
+
 - [ ] MongoDB Atlas account created
 - [ ] Groq API account created
 - [ ] API keys obtained
 
 ### ☐ Environment Setup
+
 - [ ] Clone repository
 - [ ] Run `npm install`
 - [ ] Create `.env.local` file
@@ -72,10 +81,12 @@ npm install
 - [ ] Add `GROQ_API_KEY` from Groq console
 
 ### ☐ Database Setup
+
 - [ ] Run `npx prisma db push`
 - [ ] Run `npm run db:seed`
 
 ### ☐ Launch & Test
+
 - [ ] Run `npm run dev`
 - [ ] Open http://localhost:3000
 - [ ] Test admin login (`admin`/`admin123`)
@@ -88,6 +99,7 @@ npm install
 ## File Reference
 
 ### Configuration Files (In Repo)
+
 ```
 ✅ package.json           - Dependencies list
 ✅ tsconfig.json          - TypeScript config
@@ -98,6 +110,7 @@ npm install
 ```
 
 ### Configuration Files (User Creates)
+
 ```
 ❌ .env.local             - ⭐ CRITICAL - Environment variables
 ❌ .env                   - Optional overrides
@@ -106,6 +119,7 @@ npm install
 ```
 
 ### API Keys/Secrets Needed
+
 ```
 📌 DATABASE_URL           - MongoDB connection string
 📌 JWT_SECRET            - Generated random secret
@@ -139,6 +153,7 @@ GROQ_MODEL="mixtral-8x7b-32768"
 ## Getting Each Value
 
 ### 1. DATABASE_URL
+
 ```bash
 # Step 1: Go to https://www.mongodb.com/cloud/atlas
 # Step 2: Sign up (free tier available)
@@ -150,6 +165,7 @@ GROQ_MODEL="mixtral-8x7b-32768"
 ```
 
 ### 2. JWT_SECRET
+
 ```bash
 # Run this command:
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
@@ -159,6 +175,7 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ```
 
 ### 3. GROQ_API_KEY
+
 ```bash
 # Step 1: Go to https://console.groq.com/keys
 # Step 2: Log in / Sign up
@@ -171,13 +188,13 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
 ## File Sizes (For Reference)
 
-| File/Folder | Size | In Repo? |
-|-------------|------|---------|
-| `node_modules/` | ~500MB | ❌ No |
-| `.next/` (build) | ~50MB | ❌ No |
-| `.env.local` | <1KB | ❌ No |
-| Source code | ~2MB | ✅ Yes |
-| **Total repo** | ~5MB | ✅ Yes |
+| File/Folder      | Size   | In Repo? |
+| ---------------- | ------ | -------- |
+| `node_modules/`  | ~500MB | ❌ No    |
+| `.next/` (build) | ~50MB  | ❌ No    |
+| `.env.local`     | <1KB   | ❌ No    |
+| Source code      | ~2MB   | ✅ Yes   |
+| **Total repo**   | ~5MB   | ✅ Yes   |
 
 ---
 
@@ -197,6 +214,7 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ## Route Protection ⭐ NEW
 
 ### Protected Routes (Require Login)
+
 - `/admin/*` - All admin pages and APIs (require ADMIN role)
 - `/student/dashboard` - Student dashboard (require STUDENT role)
 - `/student/courses` - View courses (require STUDENT role)
@@ -204,12 +222,14 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 - `/student/profile` - View profile (require STUDENT role)
 
 ### Public Routes (No Login Required)
+
 - `/` - Home portal
 - `/admin/login` - Admin login
 - `/student/login` - Student login
 - `/student/register` - Student registration
 
 ### What Happens Without Login
+
 - Unauthenticated users trying to access protected routes → redirected to home
 - Users already logged in accessing login page → redirected to dashboard
 - Invalid/expired auth token → redirected to home, cookie deleted
@@ -219,30 +239,40 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ## Common Issues & Solutions
 
 ### Error: "Module not found: Can't resolve '@/lib/db'"
+
 **Solution:** Run `npm install` again
 
 ### Error: "Can't reach database server"
+
 **Solution:**
+
 - Check MongoDB Atlas cluster is running
 - Verify `DATABASE_URL` is correct in `.env.local`
 - Check IP whitelist in MongoDB Atlas
 
 ### Error: "Invalid API key" (Groq)
+
 **Solution:**
+
 - Get new key from https://console.groq.com/keys
 - Update `GROQ_API_KEY` in `.env.local`
 
 ### Error: "Port 3000 already in use"
+
 **Solution:** `npm run dev -- -p 3001`
 
 ### Error: "Can't access dashboard even after login"
+
 **Solution:**
+
 - Check browser cookies contain auth token
 - Check JWT_SECRET in `.env.local` is correct
 - Clear cookies and try logging in again
 
 ### Chatbot not appearing
+
 **Solution:**
+
 - Make sure you're logged in (dashboard only)
 - Check GROQ_API_KEY is set in `.env.local`
 - Restart dev server
@@ -262,6 +292,7 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ## Documentation Files
 
 **In Repository:**
+
 - `README.md` - Project overview and features
 - `SETUP_GUIDE.md` - Complete step-by-step setup instructions
 - `DEPLOYMENT.md` - How to deploy to production

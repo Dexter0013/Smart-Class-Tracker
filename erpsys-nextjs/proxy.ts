@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyJWT } from "@/lib/auth";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const token = request.cookies.get("auth")?.value;
 
   // Public routes that don't need auth
   const publicRoutes = ["/admin/login", "/student/login", "/student/register"];
-  const isPublicRoute = publicRoutes.some((route) =>
-    request.nextUrl.pathname === route
+  const isPublicRoute = publicRoutes.some(
+    (route) => request.nextUrl.pathname === route,
   );
 
   // If accessing public routes, allow
@@ -18,7 +18,7 @@ export async function middleware(request: NextRequest) {
   // Protected routes
   const protectedRoutes = ["/admin", "/student"];
   const isProtectedRoute = protectedRoutes.some((route) =>
-    request.nextUrl.pathname.startsWith(route)
+    request.nextUrl.pathname.startsWith(route),
   );
 
   if (isProtectedRoute) {

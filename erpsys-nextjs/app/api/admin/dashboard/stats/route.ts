@@ -1,16 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAuthUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import { resolveAdminApiContext } from "@/lib/admin-api-context";
 
 export async function GET(request: NextRequest) {
   try {
-    const user = await getAuthUser();
-
-    if (!user || user.role !== "ADMIN") {
-      return NextResponse.json(
-        { success: false, message: "Unauthorized" },
-        { status: 401 }
-      );
+    const context = await resolveAdminApiContext(request, "success");
+    if (!context.ok) {
+      return context.response;
     }
 
     const [studentCount, courseCount, instructorCount, departmentCount] =
@@ -34,7 +30,7 @@ export async function GET(request: NextRequest) {
     console.error("Dashboard stats error:", error);
     return NextResponse.json(
       { success: false, message: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

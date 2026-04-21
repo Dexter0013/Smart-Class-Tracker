@@ -28,6 +28,7 @@ npm install
 ```
 
 This installs:
+
 - Next.js 16, React 19, TypeScript
 - Prisma ORM, MongoDB driver
 - Groq SDK for chatbot
@@ -45,11 +46,13 @@ This file stores your API keys and secrets.
 ### Create the file:
 
 **Mac/Linux:**
+
 ```bash
 touch .env.local
 ```
 
 **Windows:**
+
 ```bash
 echo. > .env.local
 ```
@@ -90,6 +93,7 @@ GROQ_MODEL="mixtral-8x7b-32768"
 10. Replace `<database>` with `studentdb`
 
 **Example:**
+
 ```
 mongodb+srv://admin:password123@cluster0.mongodb.net/studentdb
 ```
@@ -106,6 +110,7 @@ Add to `.env.local` as `DATABASE_URL`
 6. Copy the generated key (starts with `gsk_`)
 
 **Example:**
+
 ```
 gsk_4r7xJ9pL2mK8nQ0vZ3bW5dE6fH9iJ1kL
 ```
@@ -121,6 +126,7 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ```
 
 **Example output:**
+
 ```
 a7f3c9e2b1d4f6a8c5e9b2d7f1a4c6e9b3d5f8a1c4e7b9d2f5a8c1e4b7d0f3
 ```
@@ -155,11 +161,13 @@ npx prisma db push
 ```
 
 This creates 10 collections in MongoDB:
+
 - User, Department, Student, Instructor
 - Semester, Course, Class, Enrollment
 - Assessment, StudentMark
 
 **Output:**
+
 ```
 The following migration(s) have been created and applied to your database:
 ```
@@ -173,11 +181,13 @@ npm run db:seed
 ```
 
 This creates:
+
 - **Admin account:** `admin` / `admin123`
 - **Student account:** `student001` / `student123`
 - **Sample data:** Departments, instructors, courses, classes, etc.
 
 **Output:**
+
 ```
 🌱 Seeding database...
 ✓ Admin user created: admin
@@ -195,6 +205,7 @@ npm run dev
 ```
 
 **Output:**
+
 ```
 ▲ Next.js 16.2.3 (Turbopack)
 - Local:         http://localhost:3000
@@ -209,26 +220,31 @@ Open **http://localhost:3000** in your browser
 ## Step 9: Test the System
 
 ### Home Page
+
 - ✅ Visit http://localhost:3000
 - ✅ See home portal with Admin/Student login buttons
 
 ### Route Protection Test
+
 - ❌ Try http://localhost:3000/admin/dashboard without login → Redirects to home
 - ❌ Try http://localhost:3000/student/dashboard without login → Redirects to home
 
 ### Admin Login
+
 1. Click "Admin Login" button
 2. **Username:** `admin`
 3. **Password:** `admin123`
 4. ✅ Should see admin dashboard with stats and chatbot
 
 ### Admin Dashboard Features
+
 - View system statistics
 - Manage students, courses, departments
 - Manage instructors, semesters, classes
 - 🤖 Try chatbot (bottom right)
 
 ### Student Login
+
 1. Go back to home (click logo or type localhost:3000)
 2. Click "Student Login" button
 3. **Username:** `student001`
@@ -236,6 +252,7 @@ Open **http://localhost:3000** in your browser
 5. ✅ Should see student dashboard
 
 ### Student Dashboard Features
+
 - View enrolled courses
 - Check grades
 - View profile
@@ -302,6 +319,7 @@ npx prisma studio
 ## Troubleshooting
 
 ### "Can't reach database server"
+
 ```bash
 # Check MongoDB connection string
 # Make sure:
@@ -312,6 +330,7 @@ npx prisma studio
 ```
 
 ### "Invalid API key" (Groq)
+
 ```bash
 # Get new key from https://console.groq.com/keys
 # Update GROQ_API_KEY in .env.local
@@ -319,6 +338,7 @@ npx prisma studio
 ```
 
 ### "Invalid credentials" when logging in
+
 ```bash
 # Check database was seeded:
 npm run db:seed
@@ -328,12 +348,14 @@ npx prisma studio
 ```
 
 ### "Port 3000 already in use"
+
 ```bash
 # Use different port:
 npm run dev -- -p 3001
 ```
 
 ### Chatbot not appearing
+
 ```bash
 # 1. Make sure you're logged in (dashboard only)
 # 2. Check GROQ_API_KEY is set in .env.local
@@ -341,6 +363,7 @@ npm run dev -- -p 3001
 ```
 
 ### After login, can't access routes
+
 ```bash
 # Check cookies:
 # 1. Open browser DevTools (F12)
@@ -396,7 +419,7 @@ erpsys-nextjs/
 ├── prisma/
 │   ├── schema.prisma       # Database schema
 │   └── seed.ts             # Seed script
-├── middleware.ts           # ⭐ Route protection
+├── proxy.ts                # ⭐ Route protection
 ├── .env.local              # Environment variables (create this)
 ├── package.json
 ├── tsconfig.json
@@ -413,12 +436,14 @@ erpsys-nextjs/
 ## Default Credentials
 
 ### Admin Account
+
 - **URL:** http://localhost:3000/admin/login
 - **Username:** `admin`
 - **Password:** `admin123`
 - **Access:** All management features
 
 ### Student Account
+
 - **URL:** http://localhost:3000/student/login
 - **Username:** `student001`
 - **Password:** `student123`
@@ -459,14 +484,14 @@ erpsys-nextjs/
 
 ## Environment Variables Summary
 
-| Variable | Purpose | Where to Get |
-|----------|---------|--------------|
-| `DATABASE_URL` | MongoDB connection | MongoDB Atlas |
-| `JWT_SECRET` | Auth token signing | Generate with node |
-| `GROQ_API_KEY` | Chatbot AI | Groq console |
-| `JWT_EXPIRATION` | Token validity | Set to "7d" |
-| `NEXT_PUBLIC_API_URL` | API URL | Set to "http://localhost:3000" |
-| `GROQ_MODEL` | LLM model | Set to "mixtral-8x7b-32768" |
+| Variable              | Purpose            | Where to Get                   |
+| --------------------- | ------------------ | ------------------------------ |
+| `DATABASE_URL`        | MongoDB connection | MongoDB Atlas                  |
+| `JWT_SECRET`          | Auth token signing | Generate with node             |
+| `GROQ_API_KEY`        | Chatbot AI         | Groq console                   |
+| `JWT_EXPIRATION`      | Token validity     | Set to "7d"                    |
+| `NEXT_PUBLIC_API_URL` | API URL            | Set to "http://localhost:3000" |
+| `GROQ_MODEL`          | LLM model          | Set to "mixtral-8x7b-32768"    |
 
 ---
 

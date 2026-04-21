@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     if (!username || !password || !rollNo || !email) {
       return NextResponse.json(
         { success: false, message: "All fields are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     if (existingUser) {
       return NextResponse.json(
         { success: false, message: "Username already exists" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
     if (!existingStudent) {
       return NextResponse.json(
         { success: false, message: "Roll number not found in the system" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -84,13 +84,13 @@ export async function POST(request: NextRequest) {
           role: user.role,
         },
       },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     console.error("Registration error:", error);
     return NextResponse.json(
       { success: false, message: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
     if (!messages || !Array.isArray(messages)) {
       return NextResponse.json(
         { error: "Invalid messages format" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -29,9 +29,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : "Failed to process chat request",
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to process chat request",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

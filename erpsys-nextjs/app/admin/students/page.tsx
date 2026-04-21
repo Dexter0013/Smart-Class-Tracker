@@ -109,150 +109,199 @@ export default function AdminStudents() {
       <div className="min-h-screen bg-gray-50 pt-20">
         <Navbar userType="admin" username="Admin" />
 
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-12">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Manage Students</h1>
-        <button
-          onClick={() => {
-            setShowForm(true);
-            setFormData({
-              name: "",
-              rollNo: "",
-              email: "",
-              phone: "",
-              departmentId: departments[0]?.id || "",
-              username: "",
-              password: "",
-            });
-          }}
-          className="w-full sm:w-auto bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 font-semibold text-center text-sm sm:text-base"
-        >
-          Add Student
-        </button>
-      </div>
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-12">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+              Manage Students
+            </h1>
+            <button
+              onClick={() => {
+                setShowForm(true);
+                setFormData({
+                  name: "",
+                  rollNo: "",
+                  email: "",
+                  phone: "",
+                  departmentId: departments[0]?.id || "",
+                  username: "",
+                  password: "",
+                });
+              }}
+              className="w-full sm:w-auto bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 font-semibold text-center text-sm sm:text-base"
+            >
+              Add Student
+            </button>
+          </div>
 
-      {error && <div className="bg-red-100 p-3 sm:p-4 mb-4 rounded text-red-700 text-sm sm:text-base">{error}</div>}
-
-      {showForm && (
-        <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md mb-6">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Add New Student</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <input
-                type="text"
-                placeholder="Full Name"
-                required
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="border p-2 sm:p-3 rounded text-gray-900 placeholder-gray-500 text-sm sm:text-base"
-              />
-              <input
-                type="text"
-                placeholder="Roll Number"
-                required
-                value={formData.rollNo}
-                onChange={(e) => setFormData({ ...formData, rollNo: e.target.value })}
-                className="border p-2 sm:p-3 rounded text-gray-900 placeholder-gray-500 text-sm sm:text-base"
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                required
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="border p-2 sm:p-3 rounded text-gray-900 placeholder-gray-500 text-sm sm:text-base"
-              />
-              <input
-                type="tel"
-                placeholder="Phone Number"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="border p-2 sm:p-3 rounded text-gray-900 placeholder-gray-500 text-sm sm:text-base"
-              />
-              <select
-                value={formData.departmentId}
-                onChange={(e) => setFormData({ ...formData, departmentId: e.target.value })}
-                className="border p-2 sm:p-3 rounded text-gray-900 text-sm sm:text-base"
-                required
-              >
-                <option value="">Select Department</option>
-                {departments.map((dept) => (
-                  <option key={dept.id} value={dept.id}>
-                    {dept.departmentName}
-                  </option>
-                ))}
-              </select>
-              <input
-                type="text"
-                placeholder="Username"
-                required
-                value={formData.username}
-                onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                className="border p-2 sm:p-3 rounded text-gray-900 placeholder-gray-500 text-sm sm:text-base"
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                required
-                value={formData.password}
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                className="border p-2 sm:p-3 rounded text-gray-900 placeholder-gray-500 text-sm sm:text-base"
-              />
+          {error && (
+            <div className="bg-red-100 p-3 sm:p-4 mb-4 rounded text-red-700 text-sm sm:text-base">
+              {error}
             </div>
-            <div className="flex flex-col sm:flex-row gap-2 mt-4">
-              <button type="submit" className="w-full sm:w-auto bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 font-semibold text-sm sm:text-base">
-                Save
-              </button>
-              <button
-                type="button"
-                onClick={() => setShowForm(false)}
-                className="w-full sm:w-auto bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 font-semibold text-sm sm:text-base"
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
+          )}
 
-      <div className="overflow-x-auto bg-white rounded-lg shadow-md">
-        <table className="w-full text-xs sm:text-sm">
-          <thead className="bg-teal-600 text-white">
-            <tr>
-              <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-semibold">Name</th>
-              <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-semibold hidden sm:table-cell">Roll No</th>
-              <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-semibold hidden md:table-cell">Email</th>
-              <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-semibold hidden lg:table-cell">Department</th>
-              <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-semibold hidden lg:table-cell">Phone</th>
-              <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-semibold">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {students.map((student) => (
-              <tr key={student.id} className="border-t hover:bg-gray-50">
-                <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 font-semibold min-w-max whitespace-nowrap">{student.name}</td>
-                <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 hidden sm:table-cell">{student.rollNo}</td>
-                <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 hidden md:table-cell text-xs">{student.email}</td>
-                <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 hidden lg:table-cell">{student.department.departmentName}</td>
-                <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 hidden lg:table-cell">{student.phone || "-"}</td>
-                <td className="px-2 sm:px-6 py-3 sm:py-4 flex gap-1 sm:gap-2">
-                  <button
-                    onClick={() => handleDelete(student.id)}
-                    className="text-red-600 hover:underline text-xs sm:text-sm"
+          {showForm && (
+            <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md mb-6">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
+                Add New Student
+              </h2>
+              <form onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <input
+                    type="text"
+                    placeholder="Full Name"
+                    required
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    className="border p-2 sm:p-3 rounded text-gray-900 placeholder-gray-500 text-sm sm:text-base"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Roll Number"
+                    required
+                    value={formData.rollNo}
+                    onChange={(e) =>
+                      setFormData({ ...formData, rollNo: e.target.value })
+                    }
+                    className="border p-2 sm:p-3 rounded text-gray-900 placeholder-gray-500 text-sm sm:text-base"
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    required
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    className="border p-2 sm:p-3 rounded text-gray-900 placeholder-gray-500 text-sm sm:text-base"
+                  />
+                  <input
+                    type="tel"
+                    placeholder="Phone Number"
+                    value={formData.phone}
+                    onChange={(e) =>
+                      setFormData({ ...formData, phone: e.target.value })
+                    }
+                    className="border p-2 sm:p-3 rounded text-gray-900 placeholder-gray-500 text-sm sm:text-base"
+                  />
+                  <select
+                    value={formData.departmentId}
+                    onChange={(e) =>
+                      setFormData({ ...formData, departmentId: e.target.value })
+                    }
+                    className="border p-2 sm:p-3 rounded text-gray-900 text-sm sm:text-base"
+                    required
                   >
-                    Delete
+                    <option value="">Select Department</option>
+                    {departments.map((dept) => (
+                      <option key={dept.id} value={dept.id}>
+                        {dept.departmentName}
+                      </option>
+                    ))}
+                  </select>
+                  <input
+                    type="text"
+                    placeholder="Username"
+                    required
+                    value={formData.username}
+                    onChange={(e) =>
+                      setFormData({ ...formData, username: e.target.value })
+                    }
+                    className="border p-2 sm:p-3 rounded text-gray-900 placeholder-gray-500 text-sm sm:text-base"
+                  />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    required
+                    value={formData.password}
+                    onChange={(e) =>
+                      setFormData({ ...formData, password: e.target.value })
+                    }
+                    className="border p-2 sm:p-3 rounded text-gray-900 placeholder-gray-500 text-sm sm:text-base"
+                  />
+                </div>
+                <div className="flex flex-col sm:flex-row gap-2 mt-4">
+                  <button
+                    type="submit"
+                    className="w-full sm:w-auto bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 font-semibold text-sm sm:text-base"
+                  >
+                    Save
                   </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowForm(false)}
+                    className="w-full sm:w-auto bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 font-semibold text-sm sm:text-base"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
 
-      {students.length === 0 && (
-        <div className="text-center py-8 text-gray-500">No students found</div>
-      )}
-      </div>
+          <div className="overflow-x-auto bg-white rounded-lg shadow-md">
+            <table className="w-full text-xs sm:text-sm">
+              <thead className="bg-teal-600 text-white">
+                <tr>
+                  <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-semibold">
+                    Name
+                  </th>
+                  <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-semibold hidden sm:table-cell">
+                    Roll No
+                  </th>
+                  <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-semibold hidden md:table-cell">
+                    Email
+                  </th>
+                  <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-semibold hidden lg:table-cell">
+                    Department
+                  </th>
+                  <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-semibold hidden lg:table-cell">
+                    Phone
+                  </th>
+                  <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-semibold">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {students.map((student) => (
+                  <tr key={student.id} className="border-t hover:bg-gray-50">
+                    <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 font-semibold min-w-max whitespace-nowrap">
+                      {student.name}
+                    </td>
+                    <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 hidden sm:table-cell">
+                      {student.rollNo}
+                    </td>
+                    <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 hidden md:table-cell text-xs">
+                      {student.email}
+                    </td>
+                    <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 hidden lg:table-cell">
+                      {student.department.departmentName}
+                    </td>
+                    <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 hidden lg:table-cell">
+                      {student.phone || "-"}
+                    </td>
+                    <td className="px-2 sm:px-6 py-3 sm:py-4 flex gap-1 sm:gap-2">
+                      <button
+                        onClick={() => handleDelete(student.id)}
+                        className="text-red-600 hover:underline text-xs sm:text-sm"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {students.length === 0 && (
+            <div className="text-center py-8 text-gray-500">
+              No students found
+            </div>
+          )}
+        </div>
       </div>
     </ProtectedPage>
   );

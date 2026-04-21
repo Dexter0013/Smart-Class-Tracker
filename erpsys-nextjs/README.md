@@ -3,6 +3,7 @@
 ## ✅ Completed Components
 
 ### 1. **Core Infrastructure**
+
 - Next.js 16 with TypeScript & Tailwind CSS 4
 - MongoDB Atlas integration via Prisma ORM
 - JWT-based authentication with secure HTTP-only cookies
@@ -10,7 +11,9 @@
 - Responsive design with Tailwind CSS
 
 ### 2. **Admin Management System**
+
 Created full CRUD pages and APIs for:
+
 - 👨‍🎓 **Students** - Create, read, update, delete students
 - 👨‍🏫 **Instructors** - Manage faculty members
 - 📚 **Courses** - Organize and manage courses
@@ -19,12 +22,14 @@ Created full CRUD pages and APIs for:
 - 📖 **Classes** - Class section management
 
 ### 3. **Student Portal**
+
 - Dashboard with enrolled courses (protected)
 - View grades and academic records (protected)
 - Personal profile management (protected)
 - Course catalog browsing (protected)
 
 ### 4. **🤖 Groq AI Chatbot Integration** ⭐ NEW
+
 - Integrated **Groq API** for AI-powered assistant
 - Chatbot available **only after login** (admin/student dashboards)
 - Features:
@@ -35,6 +40,7 @@ Created full CRUD pages and APIs for:
   - Timestamps for messages
 
 ### 5. **🔒 Route Protection** ⭐ NEW
+
 - Middleware-based authentication on all protected routes
 - Auto-redirect unauthenticated users to home page
 - Role-based access control (ADMIN/STUDENT)
@@ -44,25 +50,31 @@ Created full CRUD pages and APIs for:
 ### 6. **API Endpoints** (25+ APIs)
 
 **Authentication:**
+
 - `POST /api/admin/login`
 - `POST /api/student/login`
 - `POST /api/student/register`
 - `POST /api/auth/logout`
 
 **Student APIs (Protected):**
+
 - `GET /api/student/profile`
 - `GET /api/student/courses`
 - `GET /api/student/grades`
 
 **Admin Management APIs (Protected):**
+
 - CRUD operations for students, instructors, courses, departments, semesters, classes
 - Examples: `GET/POST /api/admin/[resource]`, `DELETE /api/admin/[resource]/[id]`
 
 **Chat API (Protected):**
+
 - `POST /api/chat` - AI-powered responses via Groq (requires auth)
 
 ### 7. **Database Schema**
+
 MongoDB collections with Prisma:
+
 - User, Department, Student, Instructor
 - Semester, Course, Class, Enrollment
 - Assessment, StudentMark
@@ -70,6 +82,7 @@ MongoDB collections with Prisma:
 All with proper relationships and indexing for performance.
 
 ### 8. **Security Features**
+
 - 🔐 Role-based access control (ADMIN, STUDENT)
 - 🔐 HTTP-only cookies for token storage
 - 🔐 Secure password hashing with bcryptjs
@@ -79,6 +92,7 @@ All with proper relationships and indexing for performance.
 - 🔐 Auto-redirect authenticated users from login pages
 
 ### 9. **Default Credentials**
+
 - **Admin:** username=`admin` password=`admin123`
 - **Student:** username=`student001` password=`student123`
 
@@ -87,20 +101,24 @@ All with proper relationships and indexing for performance.
 ## 📦 Tech Stack
 
 **Frontend:**
+
 - React 19 + Next.js 16
 - Tailwind CSS 4
 - TypeScript
 
 **Backend:**
+
 - Next.js API Routes
 - Prisma ORM
 - MongoDB Atlas
 
 **AI/Chat:**
+
 - Groq API (mixtral-8x7b-32768)
 - Real-time streaming responses
 
 **Authentication:**
+
 - JWT with jose library
 - bcryptjs for password hashing
 - Middleware-based route protection
@@ -147,7 +165,7 @@ erpsys-nextjs/
 ├── prisma/
 │   ├── schema.prisma
 │   └── seed.ts
-├── middleware.ts (⭐ Route protection)
+├── proxy.ts (⭐ Route protection)
 ├── .env.local (CREATE THIS)
 ├── SETUP_GUIDE.md
 ├── FILES_NEEDED.md
@@ -159,6 +177,7 @@ erpsys-nextjs/
 ## 🚀 Quick Start
 
 ### Local Development
+
 ```bash
 cd erpsys-nextjs
 npm install
@@ -168,7 +187,9 @@ npm run dev          # Start dev server (http://localhost:3000)
 ```
 
 ### Environment Setup
+
 Create `.env.local` with:
+
 ```bash
 DATABASE_URL="mongodb+srv://username:password@cluster.mongodb.net/studentdb"
 GROQ_API_KEY="gsk_your-api-key"
@@ -178,6 +199,7 @@ JWT_SECRET="your-generated-secret-key"
 See `SETUP_GUIDE.md` for complete setup with step-by-step instructions.
 
 ### Production Build
+
 ```bash
 npm run build
 npm run start
@@ -188,6 +210,7 @@ npm run start
 ## 📋 Protected Routes
 
 ### Admin Routes (Require ADMIN login)
+
 ```
 /admin/dashboard          - Admin dashboard with stats & chatbot
 /admin/students           - Student management
@@ -199,6 +222,7 @@ npm run start
 ```
 
 ### Student Routes (Require STUDENT login)
+
 ```
 /student/dashboard        - Student dashboard with enrolled courses & chatbot
 /student/courses          - View enrolled courses with chatbot
@@ -207,6 +231,7 @@ npm run start
 ```
 
 ### Public Routes (No login required)
+
 ```
 /                          - Home portal with login options
 /admin/login               - Admin login
@@ -218,7 +243,7 @@ npm run start
 
 ## 🔐 Route Protection Features
 
-1. **Middleware Authentication** - All protected routes checked via `middleware.ts`
+1. **Proxy Authentication** - All protected routes checked via `proxy.ts`
 2. **Auto-Redirect** - Unauthenticated users → home page
 3. **Role-Based Access** - Admins can't access student routes and vice versa
 4. **Login Page Check** - If already authenticated, redirects to dashboard
@@ -256,6 +281,7 @@ npm run start
 ## 📖 Deployment Ready
 
 See `DEPLOYMENT.md` for complete deployment instructions including:
+
 - Vercel deployment (recommended)
 - Docker containerization
 - Railway setup
@@ -275,29 +301,32 @@ See `DEPLOYMENT.md` for complete deployment instructions including:
 
 ## ✨ What's New vs Original ChatBot
 
-| Feature | Original | New |
-|---------|----------|-----|
-| Model Source | Local LM Studio | Groq Cloud API |
-| Chatbot Access | Always visible | Only after login |
-| Route Protection | Manual checks | Middleware-based |
-| Setup Complexity | High | Low (just API key) |
-| Performance | Variable | Optimized |
-| Cost | Free (local resources) | Free tier available |
-| Integration | Standalone | Fully integrated ERP |
+| Feature          | Original               | New                  |
+| ---------------- | ---------------------- | -------------------- |
+| Model Source     | Local LM Studio        | Groq Cloud API       |
+| Chatbot Access   | Always visible         | Only after login     |
+| Route Protection | Manual checks          | Middleware-based     |
+| Setup Complexity | High                   | Low (just API key)   |
+| Performance      | Variable               | Optimized            |
+| Cost             | Free (local resources) | Free tier available  |
+| Integration      | Standalone             | Fully integrated ERP |
 
 ---
 
 ## 🔧 Troubleshooting
 
 **Can't access protected routes?**
+
 - Make sure you're logged in (check cookies in browser)
 - Try logging out and logging in again
 
 **Chatbot not appearing?**
+
 - Only visible on admin/student dashboards after login
 - Check GROQ_API_KEY is set in `.env.local`
 
 **Routes redirecting to home?**
+
 - Check auth token in cookies (F12 → Application → Cookies)
 - Verify JWT_SECRET is correct
 

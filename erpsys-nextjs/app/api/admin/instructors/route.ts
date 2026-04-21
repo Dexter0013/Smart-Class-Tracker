@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
-import { authenticateAdmin } from "@/lib/auth";
+import { adminFailure, resolveAdminApiContext } from "@/lib/admin-api-context";
 import bcrypt from "bcryptjs";
 
 export async function GET(req: NextRequest) {
   try {
-    const user = await authenticateAdmin(req);
-    if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const context = await resolveAdminApiContext(req);
+    if (!context.ok) return context.response;
 
     const instructors = await prisma.instructor.findMany({
       include: { department: true },
@@ -15,14 +15,14 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(instructors);
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch instructors" }, { status: 500 });
+    return adminFailure("Failed to fetch instructors");
   }
 }
 
 export async function POST(req: NextRequest) {
   try {
-    const user = await authenticateAdmin(req);
-    if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const context = await resolveAdminApiContext(req);
+    if (!context.ok) return context.response;
 
     const body = await req.json();
     const { name, email, phone, departmentId, username, password } = body;
@@ -52,6 +52,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(instructor, { status: 201 });
   } catch (error) {
     console.error("Error creating instructor:", error);
-    return NextResponse.json({ error: "Failed to create instructor" }, { status: 500 });
+    return adminFailure("Failed to create instructor");
   }
 }

@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
-import { authenticateAdmin } from "@/lib/auth";
+import { adminFailure, resolveAdminApiContext } from "@/lib/admin-api-context";
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    const user = await authenticateAdmin(req);
-    if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const context = await resolveAdminApiContext(req);
+    if (!context.ok) return context.response;
 
     const { id } = await params;
     const body = await req.json();
@@ -29,19 +29,19 @@ export async function PUT(
   } catch (error: any) {
     console.error("Error updating course:", error);
     if (error.code === "P2025") {
-      return NextResponse.json({ error: "Course not found" }, { status: 404 });
+      return adminFailure("Course not found", 404);
     }
-    return NextResponse.json({ error: "Failed to update course" }, { status: 500 });
+    return adminFailure("Failed to update course");
   }
 }
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
-    const user = await authenticateAdmin(req);
-    if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const context = await resolveAdminApiContext(req);
+    if (!context.ok) return context.response;
 
     const { id } = await params;
 
@@ -53,8 +53,8 @@ export async function DELETE(
   } catch (error: any) {
     console.error("Error deleting course:", error);
     if (error.code === "P2025") {
-      return NextResponse.json({ error: "Course not found" }, { status: 404 });
+      return adminFailure("Course not found", 404);
     }
-    return NextResponse.json({ error: "Failed to delete course" }, { status: 500 });
+    return adminFailure("Failed to delete course");
   }
 }

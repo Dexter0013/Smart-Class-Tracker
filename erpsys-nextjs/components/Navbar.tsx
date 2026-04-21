@@ -43,7 +43,9 @@ export default function Navbar({ userType, username }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex justify-between items-center h-16">
           <Link
-            href={userType === "admin" ? "/admin/dashboard" : "/student/dashboard"}
+            href={
+              userType === "admin" ? "/admin/dashboard" : "/student/dashboard"
+            }
             className="text-xl sm:text-2xl font-bold text-teal-600 truncate"
           >
             ERP System
@@ -67,8 +69,18 @@ export default function Navbar({ userType, username }: NavbarProps) {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-50"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
           </button>
 
@@ -78,7 +90,9 @@ export default function Navbar({ userType, username }: NavbarProps) {
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               className="flex items-center space-x-2 px-3 py-2 rounded-md text-xs sm:text-sm font-semibold text-gray-700 hover:text-teal-600 hover:bg-gray-50 transition whitespace-nowrap min-w-max"
             >
-              <span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-xs">{username}</span>
+              <span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-xs">
+                {username}
+              </span>
               <svg
                 className={`w-4 h-4 transform transition ${
                   isDropdownOpen ? "rotate-180" : ""
@@ -124,9 +138,21 @@ export default function Navbar({ userType, username }: NavbarProps) {
               className="flex items-center space-x-1 px-2 py-2 rounded-md text-xs font-semibold text-gray-700 hover:text-teal-600 hover:bg-gray-50 transition"
               title={username}
             >
-              <span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[100px]">{username}</span>
-              <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              <span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-25">
+                {username}
+              </span>
+              <svg
+                className="w-5 h-5 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                />
               </svg>
             </button>
 

@@ -60,77 +60,79 @@ export default function StudentProfilePage() {
       <div className="min-h-screen bg-gray-50 pt-20">
         <Navbar userType="student" username={username} />
 
-      <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-12">
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">My Profile</h1>
+        <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-12">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">
+            My Profile
+          </h1>
 
-        {profile ? (
-          <div className="bg-white rounded-lg shadow-md p-4 sm:p-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
-              <div>
-                <h3 className="text-xs sm:text-sm font-semibold text-gray-600 mb-1">
-                  Full Name
-                </h3>
-                <p className="text-base sm:text-lg font-semibold text-gray-900 mb-4">
-                  {profile.name}
-                </p>
+          {profile ? (
+            <div className="bg-white rounded-lg shadow-md p-4 sm:p-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+                <div>
+                  <h3 className="text-xs sm:text-sm font-semibold text-gray-600 mb-1">
+                    Full Name
+                  </h3>
+                  <p className="text-base sm:text-lg font-semibold text-gray-900 mb-4">
+                    {profile.name}
+                  </p>
 
-                <h3 className="text-xs sm:text-sm font-semibold text-gray-600 mb-1">
-                  Roll Number
-                </h3>
-                <p className="text-base sm:text-lg font-semibold text-gray-900 mb-4">
-                  {profile.rollNo}
-                </p>
+                  <h3 className="text-xs sm:text-sm font-semibold text-gray-600 mb-1">
+                    Roll Number
+                  </h3>
+                  <p className="text-base sm:text-lg font-semibold text-gray-900 mb-4">
+                    {profile.rollNo}
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-xs sm:text-sm font-semibold text-gray-600 mb-1">
+                    Email Address
+                  </h3>
+                  <p className="text-base sm:text-lg font-semibold text-gray-900 mb-4 break-all">
+                    {profile.email}
+                  </p>
+
+                  <h3 className="text-xs sm:text-sm font-semibold text-gray-600 mb-1">
+                    Phone Number
+                  </h3>
+                  <p className="text-base sm:text-lg font-semibold text-gray-900 mb-4">
+                    {profile.phone || "N/A"}
+                  </p>
+                </div>
               </div>
 
-              <div>
-                <h3 className="text-xs sm:text-sm font-semibold text-gray-600 mb-1">
-                  Email Address
-                </h3>
-                <p className="text-base sm:text-lg font-semibold text-gray-900 mb-4 break-all">
-                  {profile.email}
-                </p>
+              <hr className="my-6 sm:my-8" />
 
-                <h3 className="text-xs sm:text-sm font-semibold text-gray-600 mb-1">
-                  Phone Number
-                </h3>
-                <p className="text-base sm:text-lg font-semibold text-gray-900 mb-4">
-                  {profile.phone || "N/A"}
-                </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+                <div>
+                  <h3 className="text-xs sm:text-sm font-semibold text-gray-600 mb-1">
+                    Department ID
+                  </h3>
+                  <p className="text-base sm:text-lg font-semibold text-gray-900">
+                    {profile.departmentId}
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-xs sm:text-sm font-semibold text-gray-600 mb-1">
+                    Enrollment Date
+                  </h3>
+                  <p className="text-base sm:text-lg font-semibold text-gray-900">
+                    {new Date(profile.enrollmentDate).toLocaleDateString()}
+                  </p>
+                </div>
               </div>
             </div>
-
-            <hr className="my-6 sm:my-8" />
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
-              <div>
-                <h3 className="text-xs sm:text-sm font-semibold text-gray-600 mb-1">
-                  Department ID
-                </h3>
-                <p className="text-base sm:text-lg font-semibold text-gray-900">
-                  {profile.departmentId}
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-xs sm:text-sm font-semibold text-gray-600 mb-1">
-                  Enrollment Date
-                </h3>
-                <p className="text-base sm:text-lg font-semibold text-gray-900">
-                  {new Date(profile.enrollmentDate).toLocaleDateString()}
-                </p>
-              </div>
+          ) : (
+            <div className="bg-white rounded-lg shadow-md p-6 text-center text-gray-600">
+              Failed to load profile. Please try again.
             </div>
-          </div>
-        ) : (
-          <div className="bg-white rounded-lg shadow-md p-6 text-center text-gray-600">
-            Failed to load profile. Please try again.
-          </div>
-        )}
-      </div>
-      <ChatBot
-        title="Help Assistant"
-        context="You are helping students with account and profile information. Answer questions about their student profile, contact information, and general assistance."
-      />
+          )}
+        </div>
+        <ChatBot
+          title="Help Assistant"
+          context="You are helping students with account and profile information. Answer questions about their student profile, contact information, and general assistance."
+        />
       </div>
     </ProtectedPage>
   );

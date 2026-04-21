@@ -8,7 +8,10 @@ interface ProtectedPageProps {
   requiredRole?: "ADMIN" | "STUDENT";
 }
 
-export default function ProtectedPage({ children, requiredRole }: ProtectedPageProps) {
+export default function ProtectedPage({
+  children,
+  requiredRole,
+}: ProtectedPageProps) {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
@@ -59,7 +62,7 @@ export default function ProtectedPage({ children, requiredRole }: ProtectedPageP
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-50 to-blue-50">
+      <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-teal-50 to-blue-50">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading...</p>
