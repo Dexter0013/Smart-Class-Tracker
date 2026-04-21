@@ -87,7 +87,6 @@ export default function AdminDepartments() {
     }
   };
 
-  if (loading) return <div className="p-4">Loading...</div>;
 
   return (
     <ProtectedPage requiredRole="ADMIN">

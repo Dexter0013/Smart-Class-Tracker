@@ -1,8 +1,66 @@
 import Link from "next/link";
+import { ReactNode } from "react";
 
 export const metadata = {
   title: "ERP System - Student Management",
 };
+
+interface PortalCardProps {
+  title: string;
+  description: string;
+  icon: ReactNode;
+  features: string[];
+  linkHref: string;
+  linkText: string;
+  theme: "blue" | "teal";
+}
+
+function PortalCard({
+  title,
+  description,
+  icon,
+  features,
+  linkHref,
+  linkText,
+  theme,
+}: PortalCardProps) {
+  const isBlue = theme === "blue";
+
+  return (
+    <div className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition">
+      <div className="mb-6">
+        <div
+          className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${
+            isBlue ? "bg-blue-100 text-blue-600" : "bg-teal-100 text-teal-600"
+          }`}
+        >
+          {icon}
+        </div>
+        <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
+        <p className="text-gray-600 mt-2">{description}</p>
+      </div>
+
+      <ul className="space-y-2 mb-6 text-sm text-gray-600">
+        {features.map((feature, idx) => (
+          <li key={idx} className="flex items-center">
+            <span className="mr-2">✓</span> {feature}
+          </li>
+        ))}
+      </ul>
+
+      <Link
+        href={linkHref}
+        className={`block w-full font-semibold py-3 px-4 rounded-lg text-center transition text-white ${
+          isBlue
+            ? "bg-blue-600 hover:bg-blue-700"
+            : "bg-teal-600 hover:bg-teal-700"
+        }`}
+      >
+        {linkText}
+      </Link>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -20,100 +78,64 @@ export default function Home() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
           {/* Admin Portal */}
-          <div className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition">
-            <div className="mb-6">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                <svg
-                  className="w-6 h-6 text-blue-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-                  />
-                </svg>
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900">
-                Administrator
-              </h2>
-              <p className="text-gray-600 mt-2">
-                Manage students, courses, and faculty
-              </p>
-            </div>
-
-            <ul className="space-y-2 mb-6 text-sm text-gray-600">
-              <li className="flex items-center">
-                <span className="mr-2">✓</span> Student Management
-              </li>
-              <li className="flex items-center">
-                <span className="mr-2">✓</span> Course Administration
-              </li>
-              <li className="flex items-center">
-                <span className="mr-2">✓</span> Faculty Management
-              </li>
-              <li className="flex items-center">
-                <span className="mr-2">✓</span> System Reports
-              </li>
-            </ul>
-
-            <Link
-              href="/admin/login"
-              className="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg text-center transition"
-            >
-              Admin Login
-            </Link>
-          </div>
+          <PortalCard
+            title="Administrator"
+            description="Manage students, courses, and faculty"
+            theme="blue"
+            icon={
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+                />
+              </svg>
+            }
+            features={[
+              "Student Management",
+              "Course Administration",
+              "Faculty Management",
+              "System Reports",
+            ]}
+            linkHref="/admin/login"
+            linkText="Admin Login"
+          />
 
           {/* Student Portal */}
-          <div className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition">
-            <div className="mb-6">
-              <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
-                <svg
-                  className="w-6 h-6 text-teal-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 6.253v13m0-13C6.228 6.228 2 10.228 2 15s4.228 8.772 10 8.772 10-4.228 10-8.772C22 10.228 17.772 6.228 12 6.253z"
-                  />
-                </svg>
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900">Student</h2>
-              <p className="text-gray-600 mt-2">
-                Access courses and view your academic records
-              </p>
-            </div>
-
-            <ul className="space-y-2 mb-6 text-sm text-gray-600">
-              <li className="flex items-center">
-                <span className="mr-2">✓</span> View Enrolled Courses
-              </li>
-              <li className="flex items-center">
-                <span className="mr-2">✓</span> Check Grades
-              </li>
-              <li className="flex items-center">
-                <span className="mr-2">✓</span> Track Attendance
-              </li>
-              <li className="flex items-center">
-                <span className="mr-2">✓</span> Personal Profile
-              </li>
-            </ul>
-
-            <Link
-              href="/student/login"
-              className="block w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-4 rounded-lg text-center transition"
-            >
-              Student Login
-            </Link>
-          </div>
+          <PortalCard
+            title="Student"
+            description="Access courses and view your academic records"
+            theme="teal"
+            icon={
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 6.253v13m0-13C6.228 6.228 2 10.228 2 15s4.228 8.772 10 8.772 10-4.228 10-8.772C22 10.228 17.772 6.228 12 6.253z"
+                />
+              </svg>
+            }
+            features={[
+              "View Enrolled Courses",
+              "Check Grades",
+              "Track Attendance",
+              "Personal Profile",
+            ]}
+            linkHref="/student/login"
+            linkText="Student Login"
+          />
         </div>
 
         <div className="mt-16 text-center">

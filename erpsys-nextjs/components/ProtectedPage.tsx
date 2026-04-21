@@ -2,6 +2,7 @@
 
 import { useEffect, useState, ReactNode } from "react";
 import { useRouter } from "next/navigation";
+import { checkAuthAction } from "@/app/actions";
 
 interface ProtectedPageProps {
   children: ReactNode;
@@ -19,39 +20,22 @@ export default function ProtectedPage({
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        // For admin pages
-        if (requiredRole === "ADMIN") {
-          const response = await fetch("/api/admin/dashboard/stats", {
-            method: "GET",
-            credentials: "include",
-          });
-          if (response.ok) {
-            setIsAuthorized(true);
-          } else {
-            router.push("/admin/login");
-          }
+        const user = await checkAuthAction();
+        
+        if (!user) {
+          router.push(requiredRole === "ADMIN" ? "/admin/login" : "/student/login");
+          return;
         }
-        // For student pages
-        else if (requiredRole === "STUDENT") {
-          const response = await fetch("/api/student/profile", {
-            method: "GET",
-            credentials: "include",
-          });
-          if (response.ok) {
-            setIsAuthorized(true);
-          } else {
-            router.push("/student/login");
-          }
-        } else {
-          setIsAuthorized(true);
+
+        if (requiredRole && user.role !== requiredRole) {
+          router.push("/");
+          return;
         }
+
+        setIsAuthorized(true);
       } catch (error) {
         console.error("Auth check failed:", error);
-        if (requiredRole === "ADMIN") {
-          router.push("/admin/login");
-        } else if (requiredRole === "STUDENT") {
-          router.push("/student/login");
-        }
+        router.push("/");
       } finally {
         setIsLoading(false);
       }
@@ -60,26 +44,7 @@ export default function ProtectedPage({
     checkAuth();
   }, [requiredRole, router]);
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-teal-50 to-blue-50">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading...</p>
-        </div>
-      </div>
-    );
-  }
 
-  if (!isAuthorized) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-50 to-blue-50">
-        <div className="text-center">
-          <p className="text-gray-600">Redirecting...</p>
-        </div>
-      </div>
-    );
-  }
 
   return <>{children}</>;
 }

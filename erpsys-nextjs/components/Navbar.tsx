@@ -138,7 +138,7 @@ export default function Navbar({ userType, username }: NavbarProps) {
               className="flex items-center space-x-1 px-2 py-2 rounded-md text-xs font-semibold text-gray-700 hover:text-teal-600 hover:bg-gray-50 transition"
               title={username}
             >
-              <span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-25">
+              <span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-24">
                 {username}
               </span>
               <svg
