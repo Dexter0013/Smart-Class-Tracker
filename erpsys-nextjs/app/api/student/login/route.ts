@@ -1,22 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { createJWT } from "@/lib/auth";
-import { LoginRequest, LoginResponse } from "@/lib/types";
+import { LoginResponse } from "@/lib/types";
+import { LoginSchema } from "@/lib/validations";
 import bcrypt from "bcryptjs";
 
 export async function POST(
   request: NextRequest,
 ): Promise<NextResponse<LoginResponse>> {
   try {
-    const body: LoginRequest = await request.json();
-    const { username, password } = body;
+    const rawBody = await request.json();
+    const parsed = LoginSchema.safeParse(rawBody);
 
-    if (!username || !password) {
+    if (!parsed.success) {
       return NextResponse.json(
         { success: false, message: "Username and password are required" },
         { status: 400 },
       );
     }
+    const { username, password } = parsed.data;
 
     // Find student user
     const user = await prisma.user.findUnique({

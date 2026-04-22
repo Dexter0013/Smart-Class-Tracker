@@ -20,12 +20,12 @@ export async function POST(
     }
     const { username, password } = parsed.data;
 
-    // Find admin user
+    // Find instructor user
     const user = await prisma.user.findUnique({
       where: { username },
     });
 
-    if (!user || user.role !== "ADMIN") {
+    if (!user || user.role !== "INSTRUCTOR") {
       return NextResponse.json(
         { success: false, message: "Invalid credentials" },
         { status: 401 },
@@ -77,7 +77,7 @@ export async function POST(
   } catch (error) {
     console.error("Login error:", error);
     return NextResponse.json(
-      { success: false, message: "Internal server error" },
+      { success: false, message: `Internal server error: ${error instanceof Error ? error.message : String(error)}` },
       { status: 500 },
     );
   }

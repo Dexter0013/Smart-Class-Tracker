@@ -174,35 +174,8 @@ The following migration(s) have been created and applied to your database:
 
 ---
 
-## Step 7: Seed Sample Data
-
-```bash
-npm run db:seed
-```
-
-This creates:
-
-- **Admin account:** `admin2` / `123`
-- **Student account:** `stud1` / `123`
-- **Historic accounts:** Complete MySQL payload transferred with intact relationships.
-
-**Output:**
-
-```
-🌱 Seeding database...
-✓ Admin user created: admin
-✓ Departments created
-✓ Students created
-✅ Database seeded successfully!
-```
-
----
-
-## Step 8: Start Dev Server
-
-```bash
-npm run dev
-```
+npm run db:seed      # Add sample data
+npm run dev          # Start dev server (http://localhost:3000)
 
 **Output:**
 
@@ -258,6 +231,19 @@ Open **http://localhost:3000** in your browser
 - View profile
 - 🤖 Try chatbot (bottom right)
 
+### Instructor Login
+
+1. Go back to home
+2. Click "Instructor Login" button
+3. **Username:** `inst1`
+4. **Password:** `123`
+5. ✅ Should see instructor dashboard with classes
+
+### Instructor Dashboard Features
+
+- View classes & students
+- Process assessments & inputs marks
+
 ---
 
 ## 🔒 Route Protection Verification
@@ -272,6 +258,10 @@ Protected Routes (redirect to / if not logged in):
 - /student/courses
 - /student/grades
 - /admin/instructors
+- /instructor/dashboard
+- /instructor/enrollments
+- /instructor/assessments
+- /instructor/marks
 - /admin/semesters
 - /admin/classes
 ```
@@ -398,6 +388,12 @@ erpsys-nextjs/
 │   │   ├── profile/
 │   │   ├── login/
 │   │   └── register/
+│   ├── instructor/         # Instructor pages (protected)
+│   │   ├── dashboard/
+│   │   ├── enrollments/
+│   │   ├── assessments/
+│   │   ├── marks/
+│   │   └── login/
 │   ├── api/                # API endpoints
 │   │   ├── admin/          # Protected admin APIs
 │   │   ├── student/        # Protected student APIs
@@ -448,6 +444,13 @@ erpsys-nextjs/
 - **Username:** `stud1`
 - **Password:** `123`
 - **Access:** Courses, grades, profile via migrated old database.
+
+### Instructor Account
+
+- **URL:** http://localhost:3000/instructor/login
+- **Username:** `inst1`
+- **Password:** `123`
+- **Access:** Classes, grades input, assessments assigned to the specific faculty member.
 
 ---
 
@@ -506,7 +509,7 @@ erpsys-nextjs/
 
 ---
 
-**Last Updated:** April 21, 2026
+**Last Updated:** April 22, 2026
 
 ✨ **Your ERP System is ready!** 🚀
 

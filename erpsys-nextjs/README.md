@@ -28,6 +28,13 @@ Created full CRUD pages and APIs for:
 - Personal profile management (protected)
 - Course catalog browsing (protected)
 
+### 4. **Instructor Portal** ⭐ NEW
+
+- Dedicated Dashboard for faculty members (`/instructor/dashboard`)
+- Enrollment tracking API context boundaries mapping specific classes
+- Dynamic Assessment creation endpoints scoped to instructor's classes
+- Student Grade input panels natively parsing legacy numeric markers
+
 ### 4. **🤖 Groq AI Chatbot Integration** ⭐ NEW
 
 - Integrated **Groq API** for AI-powered assistant
@@ -100,6 +107,10 @@ All with proper relationships and indexing for performance.
 ### 10. **Historic Data Sync** ⭐ NEW
 - Natively mapped relational MariaDB instances (integer schema bindings) into Prisma NOSQL ObjectIds.
 - Entire legacy structure was successfully bridged into current application logic without API rewrites.
+
+### 11. **Zod API Validation** ⭐ NEW
+- Hard-coded server boundaries protecting MongoDB inserts with statically typed definitions (`lib/validations.ts`).
+- Centralized validation automatically casting native HTML string forms into numbers and nested Date objects prior to runtime Prisma operations.
 ---
 
 ## 📦 Tech Stack
@@ -121,10 +132,11 @@ All with proper relationships and indexing for performance.
 - Groq API (mixtral-8x7b-32768)
 - Real-time streaming responses
 
-**Authentication:**
+**Authentication & Validation:**
 
 - JWT with jose library
 - bcryptjs for password hashing
+- Zod validation schema framework (`^4.x` parity)
 - Middleware-based route protection
 
 ---
@@ -150,9 +162,16 @@ erpsys-nextjs/
 │   │   ├── profile/page.tsx (protected + chatbot)
 │   │   ├── login/page.tsx (public)
 │   │   └── register/page.tsx (public)
+│   ├── instructor/
+│   │   ├── dashboard/page.tsx (protected)
+│   │   ├── enrollments/page.tsx (protected)
+│   │   ├── assessments/page.tsx (protected)
+│   │   ├── marks/page.tsx (protected)
+│   │   └── login/page.tsx (public)
 │   ├── api/
 │   │   ├── admin/ (20+ protected endpoints)
 │   │   ├── student/ (protected endpoints)
+│   │   ├── instructor/ (protected endpoints)
 │   │   ├── auth/ (login, logout, register)
 │   │   └── chat/ (protected - Groq API)
 │   ├── layout.tsx
@@ -234,12 +253,22 @@ npm run start
 /student/profile          - View/edit profile with chatbot
 ```
 
+### Instructor Routes (Require INSTRUCTOR login)
+
+```
+/instructor/dashboard     - Instructor dashboard
+/instructor/enrollments   - View students in assigned classes
+/instructor/assessments   - Create assessments for assigned classes
+/instructor/marks         - Input grades for students
+```
+
 ### Public Routes (No login required)
 
 ```
 /                          - Home portal with login options
 /admin/login               - Admin login
 /student/login             - Student login
+/instructor/login          - Instructor login
 /student/register          - Student registration
 ```
 
@@ -260,13 +289,14 @@ npm run start
 
 1. **Complete Admin Panel** - Manage all academic resources (protected)
 2. **Student Dashboard** - Access courses, grades, profile (protected)
-3. **AI Chatbot** - Available only after login (Groq-powered)
-4. **Route Protection** - Automatic redirect for unauthenticated access
-5. **Full API** - RESTful endpoints for all operations (25+ APIs)
-6. **MongoDB Integration** - Scalable cloud database
-7. **Security** - JWT auth, RBAC, route protection, secure passwords
-8. **Responsive Design** - Works on all devices
-9. **Production Ready** - Deployable to Vercel, Railway, AWS
+3. **Instructor Workspace** - Full grading systems matching faculty (protected)
+4. **AI Chatbot** - Available only after login (Groq-powered)
+5. **Route Protection** - Automatic redirect for unauthenticated access
+6. **Full API** - RESTful endpoints for all operations (35+ APIs)
+7. **MongoDB Integration** - Scalable cloud database
+8. **Security** - JWT auth, RBAC, route protection, secure passwords, Zod payload validation
+9. **Responsive Design** - Works on all devices
+10. **Production Ready** - Deployable to Vercel, Railway, AWS
 
 ---
 
@@ -340,5 +370,5 @@ See `SETUP_GUIDE.md` for more troubleshooting.
 
 **Status:** 🟢 **PRODUCTION READY**
 
-**Last Updated:** April 21, 2026
-Version: 1.1.0 - Native MySQL-to-MongoDB Data Migration, Server Components, & Hydration Fixed
+**Last Updated:** April 22, 2026
+Version: 1.2.0 - Active API Validation & Secure Instructor Infrastructure Built

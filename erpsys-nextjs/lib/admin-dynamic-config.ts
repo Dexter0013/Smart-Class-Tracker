@@ -50,33 +50,3 @@ export const adminDynamicIncludes: Record<string, any> = {
   },
 };
 
-export function transformAdminBody(model: string, body: any): any {
-  const parsed = { ...body };
-
-  switch (model) {
-    case "course":
-      if (parsed.credits) {
-        parsed.credits = parseInt(parsed.credits, 10) || 3;
-      }
-      break;
-    case "assessment":
-      if (parsed.maxMarks) {
-        parsed.maxMarks = parseInt(parsed.maxMarks, 10);
-      }
-      if (parsed.assessmentDate) {
-        parsed.assessmentDate = new Date(parsed.assessmentDate);
-      }
-      break;
-    case "studentMark":
-      if (parsed.marksObtained) {
-        parsed.marksObtained = parseFloat(parsed.marksObtained);
-      }
-      break;
-    case "semester":
-      if (parsed.startDate) parsed.startDate = new Date(parsed.startDate);
-      if (parsed.endDate) parsed.endDate = new Date(parsed.endDate);
-      break;
-  }
-
-  return parsed;
-}

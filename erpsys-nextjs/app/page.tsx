@@ -12,7 +12,7 @@ interface PortalCardProps {
   features: string[];
   linkHref: string;
   linkText: string;
-  theme: "blue" | "teal";
+  theme: "blue" | "teal" | "indigo";
 }
 
 function PortalCard({
@@ -31,7 +31,7 @@ function PortalCard({
       <div className="mb-6">
         <div
           className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${
-            isBlue ? "bg-blue-100 text-blue-600" : "bg-teal-100 text-teal-600"
+            isBlue ? "bg-blue-100 text-blue-600" : theme === "indigo" ? "bg-indigo-100 text-indigo-600" : "bg-teal-100 text-teal-600"
           }`}
         >
           {icon}
@@ -53,6 +53,8 @@ function PortalCard({
         className={`block w-full font-semibold py-3 px-4 rounded-lg text-center transition text-white ${
           isBlue
             ? "bg-blue-600 hover:bg-blue-700"
+            : theme === "indigo"
+            ? "bg-indigo-600 hover:bg-indigo-700"
             : "bg-teal-600 hover:bg-teal-700"
         }`}
       >
@@ -76,7 +78,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {/* Admin Portal */}
           <PortalCard
             title="Administrator"
@@ -135,6 +137,26 @@ export default function Home() {
             ]}
             linkHref="/student/login"
             linkText="Student Login"
+          />
+
+          {/* Instructor Portal */}
+          <PortalCard
+            title="Instructor"
+            description="Manage your classes, enrollments, and grades"
+            theme="indigo"
+            icon={
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+              </svg>
+            }
+            features={[
+              "Class Enrollments",
+              "Manage Assessments",
+              "Grade Students",
+              "Track Class Stats",
+            ]}
+            linkHref="/instructor/login"
+            linkText="Instructor Login"
           />
         </div>
 

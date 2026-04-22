@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface NavbarProps {
-  userType: "admin" | "student";
+  userType: "admin" | "student" | "instructor";
   username: string;
 }
 
@@ -38,6 +38,13 @@ export default function Navbar({ userType, username }: NavbarProps) {
           { href: "/admin/assessments", label: "Assessments" },
           { href: "/admin/studentmarks", label: "Marks" },
         ]
+      : userType === "instructor"
+      ? [
+          { href: "/instructor/dashboard", label: "Dashboard" },
+          { href: "/instructor/enrollments", label: "Enrollments" },
+          { href: "/instructor/assessments", label: "Assessments" },
+          { href: "/instructor/marks", label: "Marks" },
+        ]
       : [
           { href: "/student/dashboard", label: "Dashboard" },
           { href: "/student/courses", label: "My Courses" },
@@ -51,7 +58,7 @@ export default function Navbar({ userType, username }: NavbarProps) {
         <div className="flex justify-between items-center h-16">
           <Link
             href={
-              userType === "admin" ? "/admin/dashboard" : "/student/dashboard"
+              userType === "admin" ? "/admin/dashboard" : userType === "instructor" ? "/instructor/dashboard" : "/student/dashboard"
             }
             className="text-xl sm:text-2xl font-bold text-teal-600 truncate"
           >
@@ -121,7 +128,7 @@ export default function Navbar({ userType, username }: NavbarProps) {
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2">
                 <Link
                   href={
-                    userType === "admin" ? "/admin/profile" : "/student/profile"
+                    userType === "admin" ? "/admin/dashboard" : userType === "instructor" ? "/instructor/dashboard" : "/student/profile"
                   }
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
@@ -167,7 +174,7 @@ export default function Navbar({ userType, username }: NavbarProps) {
               <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-xl py-2">
                 <Link
                   href={
-                    userType === "admin" ? "/admin/profile" : "/student/profile"
+                    userType === "admin" ? "/admin/dashboard" : userType === "instructor" ? "/instructor/dashboard" : "/student/profile"
                   }
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
