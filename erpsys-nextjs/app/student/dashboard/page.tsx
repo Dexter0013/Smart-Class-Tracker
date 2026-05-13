@@ -119,6 +119,12 @@ export default async function StudentDashboardPage() {
                 View Grades
               </Link>
               <Link
+                href="/student/attendance"
+                className="block bg-white rounded-lg shadow-md p-4 hover:shadow-lg hover:border-teal-600 border-2 border-transparent transition text-teal-600 font-semibold text-sm sm:text-base"
+              >
+                My Attendance
+              </Link>
+              <Link
                 href="/student/profile"
                 className="block bg-white rounded-lg shadow-md p-4 hover:shadow-lg hover:border-teal-600 border-2 border-transparent transition text-teal-600 font-semibold text-sm sm:text-base"
               >

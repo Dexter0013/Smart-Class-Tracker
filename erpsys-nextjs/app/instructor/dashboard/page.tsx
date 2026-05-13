@@ -35,11 +35,13 @@ export default async function InstructorDashboard() {
         <Navbar userType="instructor" username={user.username} />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">
-            Welcome, {instructor.name}
-          </h1>
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-3xl font-bold text-gray-900">
+              Welcome, {instructor.name}
+            </h1>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             <Link href="/instructor/enrollments" className="block bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-lg p-6 transition transform hover:-translate-y-1">
               <h2 className="text-xl font-bold mb-2">Enrollments</h2>
               <p className="opacity-90 text-sm">View students in your classes and assign final course grades.</p>
@@ -53,6 +55,11 @@ export default async function InstructorDashboard() {
             <Link href="/instructor/marks" className="block bg-purple-600 hover:bg-purple-700 text-white rounded-xl shadow-lg p-6 transition transform hover:-translate-y-1">
               <h2 className="text-xl font-bold mb-2">Assign Marks</h2>
               <p className="opacity-90 text-sm">Grade students natively on your active assessments.</p>
+            </Link>
+
+            <Link href="/instructor/attendance" className="block bg-green-600 hover:bg-green-700 text-white rounded-xl shadow-lg p-6 transition transform hover:-translate-y-1">
+              <h2 className="text-xl font-bold mb-2">Attendance</h2>
+              <p className="opacity-90 text-sm">Mark and view attendance for your classes.</p>
             </Link>
           </div>
 

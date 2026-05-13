@@ -2,12 +2,17 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, createContext, useContext } from "react";
 
 interface NavbarProps {
   userType: "admin" | "student" | "instructor";
   username: string;
+  onSidebarToggle?: () => void;
 }
+
+// Create context for sidebar toggle
+const SidebarContext = createContext<{ toggleSidebar: () => void } | null>(null);
+export const useSidebarToggle = () => useContext(SidebarContext);
 
 export default function Navbar({ userType, username }: NavbarProps) {
   const router = useRouter();
@@ -26,30 +31,20 @@ export default function Navbar({ userType, username }: NavbarProps) {
 
   const navLinks =
     userType === "admin"
-      ? [
-          { href: "/admin/dashboard", label: "Dashboard" },
-          { href: "/admin/users", label: "Users" },
-          { href: "/admin/departments", label: "Departments" },
-          { href: "/admin/semesters", label: "Semesters" },
-          { href: "/admin/instructors", label: "Instructors" },
-          { href: "/admin/courses", label: "Courses" },
-          { href: "/admin/classes", label: "Classes" },
-          { href: "/admin/students", label: "Students" },
-          { href: "/admin/enrollments", label: "Enrollments" },
-          { href: "/admin/assessments", label: "Assessments" },
-          { href: "/admin/studentmarks", label: "Marks" },
-        ]
+      ? []
       : userType === "instructor"
       ? [
           { href: "/instructor/dashboard", label: "Dashboard" },
           { href: "/instructor/enrollments", label: "Enrollments" },
           { href: "/instructor/assessments", label: "Assessments" },
           { href: "/instructor/marks", label: "Marks" },
+          { href: "/instructor/attendance", label: "Attendance" },
         ]
       : [
           { href: "/student/dashboard", label: "Dashboard" },
           { href: "/student/courses", label: "My Courses" },
           { href: "/student/grades", label: "Grades" },
+          { href: "/student/attendance", label: "Attendance" },
           { href: "/student/profile", label: "Profile" },
         ];
 

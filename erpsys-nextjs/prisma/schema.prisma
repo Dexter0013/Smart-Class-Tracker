@@ -53,6 +53,7 @@ model Student {
   department      Department    @relation(fields: [departmentId], references: [id])
   enrollments     Enrollment[]
   marks           StudentMark[]
+  attendanceRecords AttendanceRecord[]
 }
 
 model Instructor {
@@ -101,6 +102,7 @@ model Class {
   semester       Semester     @relation(fields: [semesterId], references: [id])
   enrollments    Enrollment[]
   assessments    Assessment[]
+  attendanceSheets Attendance[]
 }
 
 model Enrollment {
@@ -138,3 +140,29 @@ model StudentMark {
 
   @@unique([studentId, assessmentId])
 }
+
+model Attendance {
+  id             String             @id @default(auto()) @map("_id") @db.ObjectId
+  classId        String             @db.ObjectId
+  date           DateTime
+  subject        String?
+  createdAt      DateTime           @default(now())
+
+  class          Class              @relation(fields: [classId], references: [id])
+  records        AttendanceRecord[]
+
+  @@unique([classId, date])
+}
+
+model AttendanceRecord {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  attendanceId   String   @db.ObjectId
+  studentId      String   @db.ObjectId
+  status         String   @default("PRESENT")
+
+  attendance     Attendance @relation(fields: [attendanceId], references: [id], onDelete: Cascade)
+  student        Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([attendanceId, studentId])
+}
+

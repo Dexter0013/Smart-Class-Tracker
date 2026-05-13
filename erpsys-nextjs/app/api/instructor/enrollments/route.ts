@@ -2,13 +2,18 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { resolveInstructorApiContext } from "@/lib/instructor-api-context";
 
-export async function GET(_request: NextRequest) {
+export async function GET(request: NextRequest) {
   try {
     const context = await resolveInstructorApiContext();
     if (!context.ok) return context.response;
 
+    const { searchParams } = request.nextUrl;
+    const classId = searchParams.get("classId");
+
     const enrollments = await prisma.enrollment.findMany({
-      where: { class: { instructorId: context.instructorId } },
+      where: classId
+        ? { classId, class: { instructorId: context.instructorId } }
+        : { class: { instructorId: context.instructorId } },
       include: {
         student: true,
         class: {
