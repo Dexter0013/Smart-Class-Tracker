@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import ProtectedPage from "@/components/ProtectedPage";
+import { useCurrentUser } from "@/lib/useCurrentUser";
 
 interface Enrollment {
   id: string;
@@ -15,6 +16,7 @@ export default function InstructorEnrollmentsPage() {
   const [enrollments, setEnrollments] = useState<Enrollment[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingGrade, setEditingGrade] = useState<{ id: string; grade: string } | null>(null);
+  const { username } = useCurrentUser();
 
   useEffect(() => {
     fetchEnrollments();
@@ -57,8 +59,7 @@ export default function InstructorEnrollmentsPage() {
   return (
     <ProtectedPage requiredRole="INSTRUCTOR">
       <div className="min-h-screen bg-gray-50 pt-20">
-        {/* Placeholder Navbar until updated */}
-        <Navbar userType="instructor" username="Instructor" />
+        <Navbar userType="instructor" username={username || "Instructor"} />
         
         <div className="max-w-7xl mx-auto px-4 py-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-8">Course Enrollments</h1>
@@ -68,6 +69,7 @@ export default function InstructorEnrollmentsPage() {
             <table className="w-full text-sm">
               <thead className="bg-indigo-600 text-white">
                 <tr>
+                  <th className="px-6 py-4 text-left">S.No</th>
                   <th className="px-6 py-4 text-left">Class Details</th>
                   <th className="px-6 py-4 text-left">Student Info</th>
                   <th className="px-6 py-4 text-left">Final Rank/Grade</th>
@@ -75,8 +77,9 @@ export default function InstructorEnrollmentsPage() {
                 </tr>
               </thead>
               <tbody>
-                {enrollments.map((enr) => (
+                {enrollments.map((enr, index) => (
                   <tr key={enr.id} className="border-t hover:bg-gray-50">
+                    <td className="px-6 py-4 font-semibold text-gray-900">{index + 1}</td>
                     <td className="px-6 py-4 font-semibold text-gray-900">
                       <div>{enr.class.course.courseCode} ({enr.class.semester.semesterName})</div>
                       <div className="text-xs text-gray-500">{enr.class.course.courseName}</div>

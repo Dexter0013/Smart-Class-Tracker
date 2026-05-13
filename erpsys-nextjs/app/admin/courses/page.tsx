@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import ProtectedPage from "@/components/ProtectedPage";
+import { useCurrentUser } from "@/lib/useCurrentUser";
 
 interface Course {
   id: string;
@@ -28,6 +29,7 @@ export default function AdminCoursesPage() {
     departmentId: "",
   });
   const [departments, setDepartments] = useState<any[]>([]);
+  const { username } = useCurrentUser();
 
   useEffect(() => {
     fetchCourses();
@@ -120,7 +122,7 @@ export default function AdminCoursesPage() {
   return (
     <ProtectedPage requiredRole="ADMIN">
       <div className="min-h-screen bg-gray-50 pt-20">
-        <Navbar userType="admin" username="Admin" />
+        <Navbar userType="admin" username={username || "Admin"} />
 
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-12">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
@@ -232,6 +234,9 @@ export default function AdminCoursesPage() {
               <thead className="bg-teal-600 text-white">
                 <tr>
                   <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-semibold">
+                    S.No
+                  </th>
+                  <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-semibold">
                     Code
                   </th>
                   <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-semibold">
@@ -251,6 +256,9 @@ export default function AdminCoursesPage() {
               <tbody>
                 {courses.map((course) => (
                   <tr key={course.id} className="border-t hover:bg-gray-50">
+                    <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 font-semibold min-w-max whitespace-nowrap">
+                      {courses.indexOf(course) + 1}
+                    </td>
                     <td className="px-2 sm:px-6 py-3 sm:py-4 font-mono text-gray-900 min-w-max whitespace-nowrap">
                       {course.courseCode}
                     </td>

@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import ProtectedPage from "@/components/ProtectedPage";
+import ChatBot from "@/components/ChatBot";
 import { getAuthUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import Link from "next/link";
@@ -94,6 +95,10 @@ export default async function InstructorDashboard() {
           </div>
         </div>
       </div>
+      <ChatBot
+        title="Instructor Assistant"
+        context="You are an instructor assistant helping with managing classes, grading students, and creating assessments. Answer questions about student enrollments, marking, assessment creation, and provide educational guidance."
+      />
     </ProtectedPage>
   );
 }

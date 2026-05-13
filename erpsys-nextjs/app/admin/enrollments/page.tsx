@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import ProtectedPage from "@/components/ProtectedPage";
+import { useCurrentUser } from "@/lib/useCurrentUser";
 
 interface Enrollment {
   id: string;
@@ -39,6 +40,7 @@ export default function AdminEnrollmentsPage() {
   });
 
   const [isMounted, setIsMounted] = useState(false);
+  const { username } = useCurrentUser();
   useEffect(() => { setIsMounted(true); }, []);
 
   useEffect(() => {
@@ -132,7 +134,7 @@ export default function AdminEnrollmentsPage() {
   return (
     <ProtectedPage requiredRole="ADMIN">
       <div className="min-h-screen bg-gray-50 pt-20">
-        <Navbar userType="admin" username="Admin" />
+        <Navbar userType="admin" username={username || "Admin"} />
 
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
@@ -206,6 +208,7 @@ export default function AdminEnrollmentsPage() {
             <table className="w-full text-sm">
               <thead className="bg-teal-600 text-white">
                 <tr>
+                  <th className="px-6 py-3 text-left font-semibold border-b">S.No</th>
                   <th className="px-6 py-3 text-left font-semibold border-b">Student</th>
                   <th className="px-6 py-3 text-left font-semibold border-b">Course</th>
                   <th className="px-6 py-3 text-left font-semibold border-b">Semester</th>
@@ -215,8 +218,9 @@ export default function AdminEnrollmentsPage() {
                 </tr>
               </thead>
               <tbody>
-                {enrollments.map((enr) => (
+                {enrollments.map((enr, index) => (
                   <tr key={enr.id} className="border-t hover:bg-gray-50">
+                    <td className="px-6 py-4 font-semibold text-gray-900">{index + 1}</td>
                     <td className="px-6 py-4 font-semibold text-gray-900">{enr.student.name}</td>
                     <td className="px-6 py-4 text-gray-900">{enr.class.course.courseCode}</td>
                     <td className="px-6 py-4 text-gray-900">{enr.class.semester.semesterName}</td>

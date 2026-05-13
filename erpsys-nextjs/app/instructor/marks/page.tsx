@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import ProtectedPage from "@/components/ProtectedPage";
+import { useCurrentUser } from "@/lib/useCurrentUser";
 
 interface Assessment {
   id: string;
@@ -22,6 +23,7 @@ export default function InstructorMarksPage() {
   const [activeMarks, setActiveMarks] = useState<Mark[]>([]);
   const [enrollmentsMap, setEnrollmentsMap] = useState<any[]>([]); // To map missing students
   const [formGrades, setFormGrades] = useState<{ [key: string]: string }>({});
+  const { username } = useCurrentUser();
 
   useEffect(() => {
     fetchAssessments();
@@ -107,7 +109,7 @@ export default function InstructorMarksPage() {
   return (
     <ProtectedPage requiredRole="INSTRUCTOR">
       <div className="min-h-screen bg-gray-50 pt-20">
-        <Navbar userType="instructor" username="Instructor" />
+        <Navbar userType="instructor" username={username || "Instructor"} />
         
         <div className="max-w-5xl mx-auto px-4 py-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-8">Assign Marks to Students</h1>
@@ -133,17 +135,19 @@ export default function InstructorMarksPage() {
               <table className="w-full text-sm">
                 <thead className="bg-purple-600 text-white">
                   <tr>
+                    <th className="px-6 py-4 text-left">S.No</th>
                     <th className="px-6 py-4 text-left">Student</th>
                     <th className="px-6 py-4 text-left">Marks Obtained</th>
                     <th className="px-6 py-4 text-left">Submit</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {relevantEnrollments.map((enr) => {
+                  {relevantEnrollments.map((enr, index) => {
                     const sid = enr.student.id;
                     const max = selectedAss?.maxMarks || 100;
                     return (
                       <tr key={sid} className="border-t hover:bg-gray-50">
+                        <td className="px-6 py-4 font-semibold text-gray-900">{index + 1}</td>
                         <td className="px-6 py-4">
                           <div className="font-bold text-gray-900 text-base">{enr.student.name}</div>
                           <div className="text-xs text-gray-500">{enr.student.rollNo}</div>

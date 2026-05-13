@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import ProtectedPage from "@/components/ProtectedPage";
+import { useCurrentUser } from "@/lib/useCurrentUser";
 
 interface Class {
   id: string;
@@ -25,6 +26,7 @@ export default function InstructorAssessmentsPage() {
   const [classes, setClasses] = useState<Class[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
+  const { username } = useCurrentUser();
   const [formData, setFormData] = useState({
     classId: "",
     assessmentName: "",
@@ -97,7 +99,7 @@ export default function InstructorAssessmentsPage() {
   return (
     <ProtectedPage requiredRole="INSTRUCTOR">
       <div className="min-h-screen bg-gray-50 pt-20">
-        <Navbar userType="instructor" username="Instructor" />
+        <Navbar userType="instructor" username={username || "Instructor"} />
         
         <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="flex justify-between items-center mb-8">
@@ -170,6 +172,7 @@ export default function InstructorAssessmentsPage() {
             <table className="w-full text-sm">
               <thead className="bg-blue-600 text-white">
                 <tr>
+                  <th className="px-6 py-4 text-left">S.No</th>
                   <th className="px-6 py-4 text-left">Assessment Detail</th>
                   <th className="px-6 py-4 text-left">Class Context</th>
                   <th className="px-6 py-4 text-left">Max Scoring</th>
@@ -178,8 +181,9 @@ export default function InstructorAssessmentsPage() {
                 </tr>
               </thead>
               <tbody>
-                {assessments.map((ass) => (
+                {assessments.map((ass, index) => (
                   <tr key={ass.id} className="border-t hover:bg-gray-50">
+                    <td className="px-6 py-4 font-semibold text-gray-900">{index + 1}</td>
                     <td className="px-6 py-4">
                       <div className="font-bold text-gray-900">{ass.assessmentName}</div>
                       <div className="text-xs text-gray-500">{ass.assessmentDate ? new Date(ass.assessmentDate).toLocaleString() : 'No date'}</div>

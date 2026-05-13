@@ -23,7 +23,7 @@ export default async function AdminDashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 pt-20">
-      <Navbar userType="admin" username="Admin" />
+      <Navbar userType="admin" username={user.username} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">Dashboard</h1>
@@ -79,13 +79,16 @@ export default async function AdminDashboardPage() {
               "departments",
               "semesters",
               "classes",
+              "enrollments",
+              "assessments",
+              "studentmarks",
             ].map((item) => (
               <Link
                 key={item}
                 href={`/admin/${item}`}
                 className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg hover:border-teal-600 border-2 border-transparent transition text-teal-600 font-semibold capitalize"
               >
-                Manage {item}
+                Manage {item === "studentmarks" ? "Marks" : item}
               </Link>
             ))}
           </div>

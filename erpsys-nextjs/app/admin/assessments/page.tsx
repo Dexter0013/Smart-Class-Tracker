@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import ProtectedPage from "@/components/ProtectedPage";
+import { useCurrentUser } from "@/lib/useCurrentUser";
 
 interface Assessment {
   id: string;
@@ -33,6 +34,7 @@ export default function AdminAssessmentsPage() {
   });
 
   const [isMounted, setIsMounted] = useState(false);
+  const { username } = useCurrentUser();
   useEffect(() => { setIsMounted(true); }, []);
 
   useEffect(() => {
@@ -123,7 +125,7 @@ export default function AdminAssessmentsPage() {
   return (
     <ProtectedPage requiredRole="ADMIN">
       <div className="min-h-screen bg-gray-50 pt-20">
-        <Navbar userType="admin" username="Admin" />
+        <Navbar userType="admin" username={username || "Admin"} />
 
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
@@ -202,6 +204,7 @@ export default function AdminAssessmentsPage() {
             <table className="w-full text-sm">
               <thead className="bg-teal-600 text-white">
                 <tr>
+                  <th className="px-6 py-3 text-left font-semibold border-b">S.No</th>
                   <th className="px-6 py-3 text-left font-semibold border-b">Class / Course</th>
                   <th className="px-6 py-3 text-left font-semibold border-b">Assessment Name</th>
                   <th className="px-6 py-3 text-left font-semibold border-b">Max Marks</th>
@@ -210,8 +213,9 @@ export default function AdminAssessmentsPage() {
                 </tr>
               </thead>
               <tbody>
-                {assessments.map((a) => (
+                {assessments.map((a, index) => (
                   <tr key={a.id} className="border-t hover:bg-gray-50">
+                    <td className="px-6 py-4 font-semibold text-gray-900">{index + 1}</td>
                     <td className="px-6 py-4 font-semibold text-gray-900">{a.class.course.courseCode} - {a.class.semester.semesterName}</td>
                     <td className="px-6 py-4 text-gray-900 font-semibold">{a.assessmentName}</td>
                     <td className="px-6 py-4 text-gray-900">{a.maxMarks}</td>

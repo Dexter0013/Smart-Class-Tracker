@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import ProtectedPage from "@/components/ProtectedPage";
+import { useCurrentUser } from "@/lib/useCurrentUser";
 
 interface Department {
   id: string;
@@ -17,6 +18,7 @@ export default function AdminDepartments() {
   const [newDept, setNewDept] = useState("");
   const [error, setError] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
+  const { username } = useCurrentUser();
 
   useEffect(() => {
     fetchDepartments();
@@ -91,7 +93,7 @@ export default function AdminDepartments() {
   return (
     <ProtectedPage requiredRole="ADMIN">
       <div className="min-h-screen bg-gray-50 pt-20">
-        <Navbar userType="admin" username="Admin" />
+        <Navbar userType="admin" username={username || "Admin"} />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">
@@ -146,6 +148,9 @@ export default function AdminDepartments() {
               <thead className="bg-teal-600 text-white">
                 <tr>
                   <th className="px-3 sm:px-6 py-2 sm:py-3 text-left font-semibold">
+                    S.No
+                  </th>
+                  <th className="px-3 sm:px-6 py-2 sm:py-3 text-left font-semibold">
                     Department
                   </th>
                   <th className="px-3 sm:px-6 py-2 sm:py-3 text-left font-semibold">
@@ -160,8 +165,11 @@ export default function AdminDepartments() {
                 </tr>
               </thead>
               <tbody>
-                {departments.map((dept) => (
+                {departments.map((dept, index) => (
                   <tr key={dept.id} className="border-t hover:bg-gray-50">
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-900 font-semibold min-w-max whitespace-nowrap">
+                      {index + 1}
+                    </td>
                     <td className="px-3 sm:px-6 py-3 sm:py-4 text-gray-900 min-w-max whitespace-nowrap">
                       {dept.departmentName}
                     </td>

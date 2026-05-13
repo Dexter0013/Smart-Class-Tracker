@@ -43,7 +43,7 @@ export default async function StudentDashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 pt-20">
-      <Navbar userType="student" username="Student" />
+      <Navbar userType="student" username={user.username} />
 
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12">
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">

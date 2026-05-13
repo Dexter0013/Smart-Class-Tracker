@@ -16,6 +16,7 @@ export default function Navbar({ userType, username }: NavbarProps) {
 
   const handleLogout = async () => {
     try {
+      localStorage.removeItem("username");
       await fetch("/api/auth/logout", { method: "POST" });
       router.push("/");
     } catch (error) {
@@ -55,14 +56,15 @@ export default function Navbar({ userType, username }: NavbarProps) {
   return (
     <nav className="bg-white shadow-md fixed top-0 left-0 right-0 z-50 w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-16 gap-2">
           <Link
             href={
               userType === "admin" ? "/admin/dashboard" : userType === "instructor" ? "/instructor/dashboard" : "/student/dashboard"
             }
-            className="text-xl sm:text-2xl font-bold text-teal-600 truncate"
+            className="text-lg sm:text-2xl font-bold text-teal-600 whitespace-nowrap"
           >
-            ERP System
+            <span className="hidden sm:inline">ERP System</span>
+            <span className="sm:hidden">ERP</span>
           </Link>
 
           {/* Desktop Menu */}
@@ -82,9 +84,10 @@ export default function Navbar({ userType, username }: NavbarProps) {
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-50"
+            aria-label="Toggle menu"
           >
             <svg
-              className="w-6 h-6"
+              className={`w-6 h-6 transform transition ${isMobileMenuOpen ? "rotate-90" : ""}`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

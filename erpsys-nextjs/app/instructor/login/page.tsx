@@ -27,6 +27,8 @@ export default function InstructorLoginPage() {
       const data = await response.json();
 
       if (response.ok) {
+        // Store username in localStorage
+        localStorage.setItem("username", username);
         window.location.href = "/instructor/dashboard";
       } else {
         setError(data.message || "Invalid credentials");

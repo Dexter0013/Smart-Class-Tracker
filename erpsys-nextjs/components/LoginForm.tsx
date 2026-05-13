@@ -39,6 +39,9 @@ export default function LoginForm({ userType }: LoginFormProps) {
         return;
       }
 
+      // Store username in localStorage
+      localStorage.setItem("username", username);
+
       // Redirect to dashboard
       const dashboardPath =
         userType === "admin" ? "/admin/dashboard" : "/student/dashboard";

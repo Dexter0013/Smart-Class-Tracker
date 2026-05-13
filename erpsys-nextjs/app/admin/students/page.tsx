@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import ProtectedPage from "@/components/ProtectedPage";
+import { useCurrentUser } from "@/lib/useCurrentUser";
 
 interface Student {
   id: number;
@@ -20,6 +21,7 @@ export default function AdminStudents() {
   const [error, setError] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [departments, setDepartments] = useState<any[]>([]);
+  const { username } = useCurrentUser();
   const [formData, setFormData] = useState({
     name: "",
     rollNo: "",
@@ -106,7 +108,7 @@ export default function AdminStudents() {
   return (
     <ProtectedPage requiredRole="ADMIN">
       <div className="min-h-screen bg-gray-50 pt-20">
-        <Navbar userType="admin" username="Admin" />
+        <Navbar userType="admin" username={username || "Admin"} />
 
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-12">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
@@ -244,6 +246,9 @@ export default function AdminStudents() {
               <thead className="bg-teal-600 text-white">
                 <tr>
                   <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-semibold">
+                    S.No
+                  </th>
+                  <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-semibold">
                     Name
                   </th>
                   <th className="px-2 sm:px-6 py-2 sm:py-3 text-left font-semibold hidden sm:table-cell">
@@ -264,8 +269,11 @@ export default function AdminStudents() {
                 </tr>
               </thead>
               <tbody>
-                {students.map((student) => (
+                {students.map((student, index) => (
                   <tr key={student.id} className="border-t hover:bg-gray-50">
+                    <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 font-semibold min-w-max whitespace-nowrap">
+                      {index + 1}
+                    </td>
                     <td className="px-2 sm:px-6 py-3 sm:py-4 text-gray-900 font-semibold min-w-max whitespace-nowrap">
                       {student.name}
                     </td>
