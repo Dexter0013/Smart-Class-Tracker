@@ -34,14 +34,14 @@ export default function AuthenticatedLayout({
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link href="/admin/dashboard" className="text-lg sm:text-2xl font-bold text-teal-600 whitespace-nowrap">
-              <span className="hidden sm:inline">ERP System</span>
-              <span className="sm:hidden">ERP</span>
+              <span className="hidden sm:inline text-teal-600">ERP System</span>
+              <span className="sm:hidden text-teal-600">ERP</span>
             </Link>
 
             {/* Center - Hamburger */}
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="p-2 rounded-md text-gray-700 hover:bg-gray-100 transition"
+              className="p-2 rounded-md text-gray-800 hover:bg-gray-100 transition"
               aria-label="Toggle sidebar"
             >
               <svg
@@ -58,9 +58,9 @@ export default function AuthenticatedLayout({
             <div className="relative">
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-semibold text-gray-700 hover:text-teal-600 hover:bg-gray-50 transition"
+                className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-semibold text-gray-800 hover:text-teal-600 hover:bg-gray-50 transition"
               >
-                <span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-32">{username}</span>
+                <span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-32 text-gray-800">{username}</span>
                 <svg className={`w-4 h-4 transform transition ${isDropdownOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
@@ -68,11 +68,11 @@ export default function AuthenticatedLayout({
 
               {isDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2">
-                  <Link href="/admin/dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  <Link href="/admin/dashboard" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">
                     Profile
                   </Link>
                   <hr className="my-1" />
-                  <button onClick={handleLogout} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  <button onClick={handleLogout} className="w-full text-left px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">
                     Logout
                   </button>
                 </div>

@@ -100,7 +100,7 @@ export default function AdminSemestersPage() {
 
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-12">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+            <h1 className="text-4xl font-bold text-gray-900">
               Manage Semesters
             </h1>
             <button
@@ -140,7 +140,7 @@ export default function AdminSemestersPage() {
                   />
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs sm:text-sm font-semibold mb-1 text-gray-700">
+                      <label className="block text-xs sm:text-sm font-semibold mb-1 text-gray-900">
                         Start Date
                       </label>
                       <input
@@ -157,7 +157,7 @@ export default function AdminSemestersPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs sm:text-sm font-semibold mb-1 text-gray-700">
+                      <label className="block text-xs sm:text-sm font-semibold mb-1 text-gray-900">
                         End Date
                       </label>
                       <input

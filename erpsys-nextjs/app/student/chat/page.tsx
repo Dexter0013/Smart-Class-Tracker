@@ -139,7 +139,7 @@ export default function StudentChatPage() {
                   <p className="text-sm whitespace-pre-wrap">
                     {message.content}
                   </p>
-                  <span className="text-xs opacity-70 mt-2 block">
+                  <span className="text-xs opacity-70 mt-2 block text-gray-600">
                     {isMounted ? message.timestamp.toLocaleTimeString([], {
                       hour: "2-digit",
                       minute: "2-digit",
@@ -151,7 +151,7 @@ export default function StudentChatPage() {
             {loading && (
               <div className="flex justify-start">
                 <div className="bg-gray-200 text-gray-900 px-4 py-3 rounded-lg rounded-bl-none">
-                  <p className="text-sm">Assistant is typing...</p>
+                  <p className="text-sm text-gray-900">Assistant is typing...</p>
                 </div>
               </div>
             )}

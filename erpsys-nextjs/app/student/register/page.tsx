@@ -75,7 +75,7 @@ export default function StudentRegisterPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-50 to-blue-50 px-4">
       <div className="w-full max-w-md">
         <div className="bg-white rounded-lg shadow-xl p-8">
-          <h1 className="text-3xl font-bold text-center mb-2 text-gray-900">
+          <h1 className="text-4xl font-bold text-center mb-2 text-gray-900">
             Create Account
           </h1>
           <p className="text-center text-gray-600 mb-8">
@@ -92,7 +92,7 @@ export default function StudentRegisterPage() {
             <div>
               <label
                 htmlFor="rollNo"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-900 mb-1"
               >
                 Roll Number
               </label>
@@ -112,7 +112,7 @@ export default function StudentRegisterPage() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-900 mb-1"
               >
                 Email Address
               </label>
@@ -132,7 +132,7 @@ export default function StudentRegisterPage() {
             <div>
               <label
                 htmlFor="username"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-900 mb-1"
               >
                 Username
               </label>
@@ -152,7 +152,7 @@ export default function StudentRegisterPage() {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-900 mb-1"
               >
                 Password
               </label>
@@ -172,7 +172,7 @@ export default function StudentRegisterPage() {
             <div>
               <label
                 htmlFor="confirmPassword"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-900 mb-1"
               >
                 Confirm Password
               </label>

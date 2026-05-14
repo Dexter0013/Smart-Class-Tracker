@@ -112,7 +112,7 @@ export default function InstructorMarksPage() {
         <Navbar userType="instructor" username={username || "Instructor"} />
         
         <div className="max-w-5xl mx-auto px-4 py-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Assign Marks to Students</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-8">Assign Marks to Students</h1>
 
           <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-purple-500 mb-8">
             <h2 className="text-sm font-semibold mb-2 text-gray-600 uppercase tracking-widest">Global Select Assessment</h2>

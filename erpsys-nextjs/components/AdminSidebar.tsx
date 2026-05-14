@@ -42,10 +42,10 @@ export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
               key={item.href}
               href={item.href}
               onClick={onClose}
-              className={`block px-4 py-2 rounded-md text-sm font-medium transition ${
+              className={`block px-4 py-2 rounded-md text-sm transition ${
                 pathname === item.href || pathname.startsWith(item.href + "/")
                   ? "bg-teal-50 text-teal-600 font-semibold"
-                  : "text-gray-700 hover:text-teal-600 hover:bg-gray-50"
+                  : "text-gray-700 font-medium hover:text-teal-600 hover:bg-gray-50"
               }`}
             >
               {item.label}

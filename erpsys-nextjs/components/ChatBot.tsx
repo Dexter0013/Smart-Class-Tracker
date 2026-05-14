@@ -170,8 +170,8 @@ export default function ChatBot({
                   : "bg-gray-200 text-gray-900 rounded-bl-none"
               }`}
             >
-              <p className="text-sm">{message.content}</p>
-              <span className="text-xs opacity-70 mt-1 block">
+              <p className="text-sm text-gray-900">{message.content}</p>
+              <span className="text-xs opacity-70 mt-1 block text-gray-600">
                 {isMounted ? message.timestamp.toLocaleTimeString([], {
                   hour: "2-digit",
                   minute: "2-digit",
@@ -183,7 +183,7 @@ export default function ChatBot({
         {loading && (
           <div className="flex justify-start">
             <div className="bg-gray-200 text-gray-900 px-4 py-2 rounded-lg rounded-bl-none">
-              <p className="text-sm">Typing...</p>
+              <p className="text-sm text-gray-900">Typing...</p>
             </div>
           </div>
         )}

@@ -50,7 +50,7 @@ export default function StudentProfilePage() {
         <Navbar userType="student" username={username} />
 
         <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-12">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-6 sm:mb-8">
             My Profile
           </h1>
 

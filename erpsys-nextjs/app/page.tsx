@@ -66,7 +66,7 @@ function PortalCard({
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 to-blue-50">
+    <div className="min-h-screen bg-linear-to-br from-teal-50 to-blue-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold text-gray-900 mb-4">
@@ -167,14 +167,14 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
               <div className="text-3xl mb-2">📚</div>
-              <h4 className="font-semibold text-gray-900">Course Management</h4>
+              <h4 className="text-base font-semibold text-gray-900">Course Management</h4>
               <p className="text-sm text-gray-600 mt-2">
                 Organize and manage courses efficiently
               </p>
             </div>
             <div className="text-center">
               <div className="text-3xl mb-2">📊</div>
-              <h4 className="font-semibold text-gray-900">
+              <h4 className="text-base font-semibold text-gray-900">
                 Performance Tracking
               </h4>
               <p className="text-sm text-gray-600 mt-2">
@@ -183,7 +183,7 @@ export default function Home() {
             </div>
             <div className="text-center">
               <div className="text-3xl mb-2">🔒</div>
-              <h4 className="font-semibold text-gray-900">Secure Access</h4>
+              <h4 className="text-base font-semibold text-gray-900">Secure Access</h4>
               <p className="text-sm text-gray-600 mt-2">
                 Protected login for all users
               </p>

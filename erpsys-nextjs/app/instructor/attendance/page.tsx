@@ -38,6 +38,7 @@ export default function InstructorAttendancePage() {
   const [students, setStudents] = useState<Student[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<string>("");
   const { username } = useCurrentUser();
 
   const [formData, setFormData] = useState({
@@ -162,7 +163,7 @@ export default function InstructorAttendancePage() {
 
         <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">Attendance Management</h1>
+            <h1 className="text-4xl font-bold text-gray-900">Attendance Management</h1>
             <a
               href="/api/instructor/export"
               download
@@ -240,8 +241,8 @@ export default function InstructorAttendancePage() {
               </div>
 
               <div className="mb-6">
-                <h3 className="text-sm font-semibold text-gray-900 mb-3">Students</h3>
-                <div className="space-y-2 max-h-96 overflow-y-auto bg-gray-50 p-4 rounded-lg">
+                <h3 className="text-sm font-semibold text-gray-900 mb-3">Students ({students.length})</h3>
+                <div className="space-y-2 bg-gray-50 p-4 rounded-lg">
                   {students.map(student => (
                     <div key={student.id} className="flex items-center justify-between p-3 bg-white rounded border border-gray-200">
                       <span className="text-sm text-gray-900">
@@ -282,37 +283,41 @@ export default function InstructorAttendancePage() {
           )}
 
           {/* Attendance History */}
-          <div className="bg-white rounded-lg shadow overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead className="bg-indigo-600 text-white">
-                <tr>
-                  <th className="px-6 py-3 text-left">Date</th>
-                  <th className="px-6 py-3 text-left">Subject</th>
-                  <th className="px-6 py-3 text-left">Present</th>
-                  <th className="px-6 py-3 text-left">Absent</th>
-                  <th className="px-6 py-3 text-left">Late</th>
-                  <th className="px-6 py-3 text-left">Excused</th>
-                  <th className="px-6 py-3 text-left">Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                {isFetchingData ? (
-                  <tr>
-                    <td colSpan={7} className="px-6 py-8 text-center">
-                      <div className="flex justify-center items-center">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
-                        <span className="ml-3 text-gray-600 font-medium">Fetching attendance records...</span>
-                      </div>
-                    </td>
-                  </tr>
-                ) : !Array.isArray(attendanceList) || attendanceList.length === 0 ? (
-                  <tr>
-                    <td colSpan={7} className="px-6 py-4 text-center text-gray-500">
-                      No attendance records yet
-                    </td>
-                  </tr>
-                ) : (
-                  attendanceList.map(att => {
+          <div className="mb-6">
+            <div className="bg-white p-6 rounded-lg shadow mb-6">
+              <label className="block text-sm font-semibold text-gray-900 mb-2">Filter by Date:</label>
+              <input
+                type="date"
+                value={selectedDate}
+                onChange={(e) => setSelectedDate(e.target.value)}
+                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600 text-gray-900"
+              />
+              {selectedDate && (
+                <button
+                  onClick={() => setSelectedDate("")}
+                  className="ml-3 px-4 py-2 bg-gray-200 text-gray-900 rounded-lg hover:bg-gray-300 transition"
+                >
+                  Clear Filter
+                </button>
+              )}
+            </div>
+
+            <div className="bg-white rounded-lg shadow">
+              {isFetchingData ? (
+                <div className="px-6 py-8 text-center">
+                  <div className="flex justify-center items-center">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+                    <span className="ml-3 text-gray-600 font-medium">Fetching attendance records...</span>
+                  </div>
+                </div>
+              ) : !Array.isArray(attendanceList) || attendanceList.length === 0 ? (
+                <div className="px-6 py-4 text-center text-gray-500">
+                  No attendance records yet
+                </div>
+              ) : (
+                attendanceList
+                  .filter(att => !selectedDate || new Date(att.date).toISOString().split("T")[0] === selectedDate)
+                  .map(att => {
                     const records = Array.isArray(att.records) ? att.records : [];
                     const stats = {
                       present: records.filter(r => r.status === "PRESENT").length,
@@ -321,22 +326,64 @@ export default function InstructorAttendancePage() {
                       excused: records.filter(r => r.status === "EXCUSED").length,
                     };
                     return (
-                      <tr key={att.id} className="border-t border-gray-200 hover:bg-gray-50">
-                        <td className="px-6 py-4 text-gray-900">
-                          {new Date(att.date).toLocaleDateString()}
-                        </td>
-                        <td className="px-6 py-4 text-gray-900">{att.subject || "-"}</td>
-                        <td className="px-6 py-4 text-green-600 font-semibold">{stats.present}</td>
-                        <td className="px-6 py-4 text-red-600 font-semibold">{stats.absent}</td>
-                        <td className="px-6 py-4 text-yellow-600 font-semibold">{stats.late}</td>
-                        <td className="px-6 py-4 text-blue-600 font-semibold">{stats.excused}</td>
-                        <td className="px-6 py-4 text-gray-900 font-semibold">{records.length}</td>
-                      </tr>
+                      <div key={att.id} className="border-b last:border-b-0">
+                        <div className="bg-gradient-to-r from-indigo-50 to-blue-50 p-4 border-b border-gray-200">
+                          <div className="flex justify-between items-center">
+                            <div>
+                              <p className="font-semibold text-gray-900">{new Date(att.date).toLocaleDateString()}</p>
+                              {att.subject && <p className="text-sm text-gray-600">Subject: {att.subject}</p>}
+                            </div>
+                            <div className="flex gap-6 text-sm">
+                              <div className="text-center">
+                                <p className="text-green-600 font-bold text-lg">{stats.present}</p>
+                                <p className="text-gray-600 text-xs">Present</p>
+                              </div>
+                              <div className="text-center">
+                                <p className="text-red-600 font-bold text-lg">{stats.absent}</p>
+                                <p className="text-gray-600 text-xs">Absent</p>
+                              </div>
+                              <div className="text-center">
+                                <p className="text-yellow-600 font-bold text-lg">{stats.late}</p>
+                                <p className="text-gray-600 text-xs">Late</p>
+                              </div>
+                              <div className="text-center">
+                                <p className="text-blue-600 font-bold text-lg">{stats.excused}</p>
+                                <p className="text-gray-600 text-xs">Excused</p>
+                              </div>
+                              <div className="text-center border-l pl-6">
+                                <p className="text-gray-900 font-bold text-lg">{records.length}</p>
+                                <p className="text-gray-600 text-xs">Total</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="divide-y">
+                          {records.map((record, idx) => (
+                            <div key={idx} className="px-6 py-3 hover:bg-gray-50 flex items-center justify-between">
+                              <span className="text-gray-900">
+                                {record.student?.name} <span className="text-gray-500">({record.student?.rollNo})</span>
+                              </span>
+                              <span
+                                className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+                                  record.status === "PRESENT"
+                                    ? "bg-green-100 text-green-800"
+                                    : record.status === "ABSENT"
+                                    ? "bg-red-100 text-red-800"
+                                    : record.status === "LATE"
+                                    ? "bg-yellow-100 text-yellow-800"
+                                    : "bg-blue-100 text-blue-800"
+                                }`}
+                              >
+                                {record.status}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     );
                   })
-                )}
-              </tbody>
-            </table>
+              )}
+            </div>
           </div>
             </>
           )}

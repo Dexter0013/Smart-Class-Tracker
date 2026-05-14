@@ -103,7 +103,7 @@ export default function InstructorAssessmentsPage() {
         
         <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">Manage Course Assessments</h1>
+            <h1 className="text-4xl font-bold text-gray-900">Manage Course Assessments</h1>
             <button 
               onClick={() => setShowForm(true)}
               className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold shadow hover:bg-blue-700 transition"
@@ -114,7 +114,7 @@ export default function InstructorAssessmentsPage() {
 
           {showForm && (
             <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-500 mb-8">
-              <h2 className="text-xl font-bold mb-4">Create New Assessment Component</h2>
+              <h2 className="text-xl font-bold mb-4 text-gray-900">Create New Assessment Component</h2>
               <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold mb-1">Target Class</label>

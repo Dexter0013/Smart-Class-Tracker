@@ -62,7 +62,7 @@ export default function InstructorEnrollmentsPage() {
         <Navbar userType="instructor" username={username || "Instructor"} />
         
         <div className="max-w-7xl mx-auto px-4 py-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Course Enrollments</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-8">Course Enrollments</h1>
           <p className="text-gray-600 mb-6 font-semibold">NOTE: You can only assign final grades here. Contact Admin to enroll/remove students.</p>
 
           <div className="bg-white rounded-lg shadow overflow-x-auto">

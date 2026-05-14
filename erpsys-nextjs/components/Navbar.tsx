@@ -56,10 +56,10 @@ export default function Navbar({ userType, username }: NavbarProps) {
             href={
               userType === "admin" ? "/admin/dashboard" : userType === "instructor" ? "/instructor/dashboard" : "/student/dashboard"
             }
-            className="text-lg sm:text-2xl font-bold text-teal-600 whitespace-nowrap"
+            className="text-2xl font-bold text-teal-600 whitespace-nowrap"
           >
-            <span className="hidden sm:inline">ERP System</span>
-            <span className="sm:hidden">ERP</span>
+            <span className="hidden sm:inline text-gray-800">ERP System</span>
+            <span className="sm:hidden text-gray-800">ERP</span>
           </Link>
 
           {/* Desktop Menu */}
@@ -68,7 +68,7 @@ export default function Navbar({ userType, username }: NavbarProps) {
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-3 py-2 rounded-md text-sm font-semibold text-gray-700 hover:text-teal-600 hover:bg-gray-50 transition"
+                className="px-3 py-2 rounded-md text-sm font-medium text-gray-800 hover:text-teal-600 hover:bg-gray-50 transition"
               >
                 {link.label}
               </Link>
@@ -78,7 +78,7 @@ export default function Navbar({ userType, username }: NavbarProps) {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-50"
+            className="md:hidden p-2 rounded-md text-gray-800 hover:bg-gray-50"
             aria-label="Toggle menu"
           >
             <svg
@@ -100,9 +100,9 @@ export default function Navbar({ userType, username }: NavbarProps) {
           <div className="relative hidden sm:block">
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="flex items-center space-x-2 px-3 py-2 rounded-md text-xs sm:text-sm font-semibold text-gray-700 hover:text-teal-600 hover:bg-gray-50 transition whitespace-nowrap min-w-max"
+              className="flex items-center space-x-2 px-3 py-2 rounded-md text-xs sm:text-sm font-semibold text-gray-800 hover:text-teal-600 hover:bg-gray-50 transition whitespace-nowrap min-w-max"
             >
-              <span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-xs">
+              <span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-xs text-gray-800">
                 {username}
               </span>
               <svg
@@ -147,10 +147,10 @@ export default function Navbar({ userType, username }: NavbarProps) {
           <div className="sm:hidden relative">
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="flex items-center space-x-1 px-2 py-2 rounded-md text-xs font-semibold text-gray-700 hover:text-teal-600 hover:bg-gray-50 transition"
+              className="flex items-center space-x-1 px-2 py-2 rounded-md text-xs font-semibold text-gray-800 hover:text-teal-600 hover:bg-gray-50 transition"
               title={username}
             >
-              <span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-24">
+              <span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-24 text-gray-800">
                 {username}
               </span>
               <svg
@@ -174,14 +174,14 @@ export default function Navbar({ userType, username }: NavbarProps) {
                   href={
                     userType === "admin" ? "/admin/dashboard" : userType === "instructor" ? "/instructor/dashboard" : "/student/profile"
                   }
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100"
                 >
                   Profile
                 </Link>
                 <hr className="my-1" />
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="w-full text-left px-4 py-2 text-sm text-gray-800 hover:bg-gray-100"
                 >
                   Logout
                 </button>
@@ -197,7 +197,7 @@ export default function Navbar({ userType, username }: NavbarProps) {
               <Link
                 key={link.href}
                 href={link.href}
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-gray-50"
+                className="px-3 py-2 rounded-md text-sm font-medium text-gray-800 hover:text-teal-600 hover:bg-gray-50 transition"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}

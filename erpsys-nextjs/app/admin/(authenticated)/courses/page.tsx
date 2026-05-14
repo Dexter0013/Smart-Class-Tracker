@@ -124,7 +124,7 @@ export default function AdminCoursesPage() {
 
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-12">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+            <h1 className="text-4xl font-bold text-gray-900">
               Manage Courses
             </h1>
             <button

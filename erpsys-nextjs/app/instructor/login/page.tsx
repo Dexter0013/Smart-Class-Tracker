@@ -49,7 +49,7 @@ export default function InstructorLoginPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
             </svg>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">Instructor Portal</h1>
+          <h1 className="text-4xl font-bold text-gray-900">Instructor Portal</h1>
           <p className="text-gray-500 mt-2">Sign in to manage classes and grades</p>
         </div>
 
@@ -61,7 +61,7 @@ export default function InstructorLoginPage() {
 
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-900 mb-1">
               Username
             </label>
             <input
@@ -75,7 +75,7 @@ export default function InstructorLoginPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-900 mb-1">
               Password
             </label>
             <input

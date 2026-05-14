@@ -46,13 +46,13 @@ export default async function StudentDashboardPage() {
       <Navbar userType="student" username={user.username} />
 
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12">
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">
+        <h1 className="text-4xl font-bold text-gray-900 mb-6 sm:mb-8">
           My Dashboard
         </h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
           <div className="lg:col-span-2">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
               Enrolled Courses
             </h2>
 
@@ -102,7 +102,7 @@ export default async function StudentDashboardPage() {
           </div>
 
           <div>
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
               Quick Links
             </h2>
             <div className="space-y-2 sm:space-y-3">
