@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import ChatBot from "@/components/ChatBot";
 import ProtectedPage from "@/components/ProtectedPage";
+import { useCurrentUser } from "@/lib/useCurrentUser";
 
 interface StudentProfile {
   name: string;
@@ -17,7 +18,7 @@ interface StudentProfile {
 
 export default function StudentProfilePage() {
   const [profile, setProfile] = useState<StudentProfile | null>(null);
-  const [username, setUsername] = useState("");
+  const { username } = useCurrentUser();
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
@@ -29,7 +30,6 @@ export default function StudentProfilePage() {
 
         if (data.success) {
           setProfile(data.data);
-          setUsername(data.data.user?.username || "Student");
         } else {
           router.push("/student/login");
         }
@@ -47,7 +47,7 @@ export default function StudentProfilePage() {
   return (
     <ProtectedPage requiredRole="STUDENT">
       <div className="min-h-screen bg-gray-50 pt-20">
-        <Navbar userType="student" username={username} />
+        <Navbar userType="student" username={username || "Student"} />
 
         <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-6 sm:mb-8">

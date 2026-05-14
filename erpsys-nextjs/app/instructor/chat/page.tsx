@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import Navbar from "@/components/Navbar";import { useCurrentUser } from \"@/lib/useCurrentUser\";
+import Navbar from "@/components/Navbar";
+import { useCurrentUser } from "@/lib/useCurrentUser";
+
 interface Message {
   id: string;
   role: "user" | "assistant";
@@ -9,12 +11,14 @@ interface Message {
   timestamp: Date;
 }
 
-export default function StudentChatPage() {  const { username } = useCurrentUser();  const [messages, setMessages] = useState<Message[]>([
+export default function InstructorChatPage() {
+  const { username } = useCurrentUser();
+  const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
       role: "assistant",
       content:
-        "Hello! I'm your educational assistant. I can help you with questions about your courses, assignments, grades, and provide study guidance. What would you like to know?",
+        "Hello! I'm your instructional assistant. I can help you with class management, student assessments, attendance records, and teaching strategies. What do you need help with?",
       timestamp: new Date(),
     },
   ]);
@@ -60,7 +64,7 @@ export default function StudentChatPage() {  const { username } = useCurrentUser
             .map((m) => ({ role: m.role, content: m.content }))
             .concat([{ role: "user", content: input }]),
           context:
-            "You are an educational assistant for the Smart Class Tracker ERP system. Help students with their courses, assignments, and academic questions.",
+            "You are an instructional assistant for the Smart Class Tracker ERP system. Help instructors with class management, student assessments, marking, attendance, and teaching questions.",
         }),
       });
 
@@ -99,7 +103,7 @@ export default function StudentChatPage() {  const { username } = useCurrentUser
           id: "1",
           role: "assistant",
           content:
-            "Hello! I'm your educational assistant. I can help you with questions about your courses, assignments, grades, and provide study guidance. What would you like to know?",
+            "Hello! I'm your instructional assistant. I can help you with class management, student assessments, attendance records, and teaching strategies. What do you need help with?",
           timestamp: new Date(),
         },
       ]);
@@ -108,15 +112,15 @@ export default function StudentChatPage() {  const { username } = useCurrentUser
 
   return (
     <div className="min-h-screen bg-gray-50 pt-20">
-      <Navbar userType=\"student\" username={username} />
+      <Navbar userType="instructor" username={username} />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col h-[600px]">
           {/* Header */}
           <div className="bg-teal-600 text-white p-6">
-            <h1 className="text-2xl font-bold">Educational Assistant</h1>
+            <h1 className="text-2xl font-bold">Instructional Assistant</h1>
             <p className="text-teal-100 mt-1">
-              Ask questions about your courses and get help with your studies
+              Get help with class management, assessments, and student guidance
             </p>
           </div>
 
@@ -138,10 +142,12 @@ export default function StudentChatPage() {  const { username } = useCurrentUser
                     {message.content}
                   </p>
                   <span className="text-xs opacity-70 mt-2 block text-gray-600">
-                    {isMounted ? message.timestamp.toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    }) : ""}
+                    {isMounted
+                      ? message.timestamp.toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })
+                      : ""}
                   </span>
                 </div>
               </div>
@@ -187,21 +193,21 @@ export default function StudentChatPage() {  const { username } = useCurrentUser
         {/* Tips */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-white p-4 rounded-lg shadow">
-            <h3 className="font-bold text-teal-600 mb-2">💡 Tip</h3>
+            <h3 className="font-bold text-teal-600 mb-2">📊 Class Stats</h3>
             <p className="text-sm text-gray-600">
-              Ask about your courses and their content
+              Ask about attendance trends and performance metrics
             </p>
           </div>
           <div className="bg-white p-4 rounded-lg shadow">
-            <h3 className="font-bold text-teal-600 mb-2">📚 Study Help</h3>
+            <h3 className="font-bold text-teal-600 mb-2">📝 Grading Help</h3>
             <p className="text-sm text-gray-600">
-              Request explanations and study guidance
+              Get guidance on assessment and marking strategies
             </p>
           </div>
           <div className="bg-white p-4 rounded-lg shadow">
-            <h3 className="font-bold text-teal-600 mb-2">❓ Questions</h3>
+            <h3 className="font-bold text-teal-600 mb-2">👥 Student Mgmt</h3>
             <p className="text-sm text-gray-600">
-              Ask questions about assignments and grades
+              Advice on student management and feedback
             </p>
           </div>
         </div>

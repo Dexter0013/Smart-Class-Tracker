@@ -31,7 +31,10 @@ export default function Navbar({ userType, username }: NavbarProps) {
 
   const navLinks =
     userType === "admin"
-      ? []
+      ? [
+          { href: "/admin/dashboard", label: "Dashboard" },
+          { href: "/admin/chat", label: "Assistant" },
+        ]
       : userType === "instructor"
       ? [
           { href: "/instructor/dashboard", label: "Dashboard" },
@@ -39,6 +42,7 @@ export default function Navbar({ userType, username }: NavbarProps) {
           { href: "/instructor/assessments", label: "Assessments" },
           { href: "/instructor/marks", label: "Marks" },
           { href: "/instructor/attendance", label: "Attendance" },
+          { href: "/instructor/chat", label: "Assistant" },
         ]
       : [
           { href: "/student/dashboard", label: "Dashboard" },
@@ -46,6 +50,7 @@ export default function Navbar({ userType, username }: NavbarProps) {
           { href: "/student/grades", label: "Grades" },
           { href: "/student/attendance", label: "Attendance" },
           { href: "/student/profile", label: "Profile" },
+          { href: "/student/chat", label: "Assistant" },
         ];
 
   return (

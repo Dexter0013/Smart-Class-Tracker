@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import ChatBot from "@/components/ChatBot";
 import ProtectedPage from "@/components/ProtectedPage";
+import { useCurrentUser } from "@/lib/useCurrentUser";
 
 interface Course {
   enrollmentId: number;
@@ -20,7 +21,7 @@ interface Course {
 
 export default function StudentCoursesPage() {
   const [courses, setCourses] = useState<Course[]>([]);
-  const [username, setUsername] = useState("");
+  const { username } = useCurrentUser();
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
@@ -49,7 +50,7 @@ export default function StudentCoursesPage() {
   return (
     <ProtectedPage requiredRole="STUDENT">
       <div className="min-h-screen bg-gray-50 pt-20">
-        <Navbar userType="student" username={username || "Student"} />
+        <Navbar userType="student" username={username} />
 
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-6 sm:mb-8">

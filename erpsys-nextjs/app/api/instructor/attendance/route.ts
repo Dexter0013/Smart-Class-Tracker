@@ -32,6 +32,18 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    // Verify instructor owns this class
+    const classRecord = await prisma.class.findUnique({
+      where: { id: classId },
+    });
+
+    if (!classRecord || classRecord.instructorId !== instructor.id) {
+      return NextResponse.json(
+        { message: "Forbidden - this class is not yours" },
+        { status: 403 }
+      );
+    }
+
     const attendance = await prisma.attendance.findMany({
       where: { classId },
       include: {

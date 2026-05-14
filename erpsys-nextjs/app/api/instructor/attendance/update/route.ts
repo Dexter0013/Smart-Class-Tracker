@@ -12,6 +12,17 @@ export async function PUT(request: NextRequest) {
       );
     }
 
+    const instructor = await prisma.instructor.findUnique({
+      where: { userId: user.userId },
+    });
+
+    if (!instructor) {
+      return NextResponse.json(
+        { message: "Instructor not found" },
+        { status: 404 }
+      );
+    }
+
     const body = await request.json();
     const { recordId, status } = body;
 
@@ -19,6 +30,23 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json(
         { message: "Invalid request body" },
         { status: 400 }
+      );
+    }
+
+    // Verify instructor owns the attendance's class
+    const record = await prisma.attendanceRecord.findUnique({
+      where: { id: recordId },
+      include: {
+        attendance: {
+          include: { class: true },
+        },
+      },
+    });
+
+    if (!record || record.attendance.class.instructorId !== instructor.id) {
+      return NextResponse.json(
+        { message: "Forbidden - this attendance record is not yours" },
+        { status: 403 }
       );
     }
 
