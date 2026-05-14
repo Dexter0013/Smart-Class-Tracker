@@ -59,7 +59,7 @@ Users (Student / Teacher / Admin)
 Frontend Dashboard
         │
         ▼
-FastAPI Backend
+Next.js API Routes
         │
  ┌──────┼─────────────┐
  ▼      ▼             ▼
@@ -97,8 +97,8 @@ Database (Students, Courses, Attendance, Assignments)
 
 ### Deployment
 
-* Docker
-* Vercel / Railway / Self-hosted options
+* Railway / Render / VPS (PM2)
+* Vercel (Frontend only)
 
 ---
 
@@ -152,10 +152,13 @@ Install dependencies
 npm install
 ```
 
-Setup environment variables (see DEPLOYMENT.md)
+Setup environment variables
 
 ```
-cp .env.example .env.local
+Create a .env.local file with:
+DATABASE_URL="..."
+GROQ_API_KEY="..."
+JWT_SECRET="..."
 ```
 
 Initialize database

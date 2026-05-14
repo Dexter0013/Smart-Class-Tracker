@@ -7,7 +7,7 @@ const ALLOWED_ORIGINS = [
   process.env.NEXT_PUBLIC_APP_URL,
 ].filter(Boolean);
 
-export function middleware(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   const origin = request.headers.get("origin");
   const pathname = request.nextUrl.pathname;
 

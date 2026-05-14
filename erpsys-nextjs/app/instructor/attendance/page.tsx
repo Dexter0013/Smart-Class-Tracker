@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import ProtectedPage from "@/components/ProtectedPage";
 import { useCurrentUser } from "@/lib/useCurrentUser";
+import ChatBot from "@/components/ChatBot";
 
 interface Class {
   id: string;
@@ -388,6 +389,10 @@ export default function InstructorAttendancePage() {
             </>
           )}
         </div>
+        <ChatBot 
+          title="Attendance Assistant" 
+          context="You are helping an instructor manage class attendance. Answer questions about marking attendance, generating reports, and student absenteeism."
+        />
       </div>
     </ProtectedPage>
   );

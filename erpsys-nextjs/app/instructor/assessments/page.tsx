@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import ProtectedPage from "@/components/ProtectedPage";
 import { useCurrentUser } from "@/lib/useCurrentUser";
+import ChatBot from "@/components/ChatBot";
 
 interface Class {
   id: string;
@@ -215,6 +216,10 @@ export default function InstructorAssessmentsPage() {
             {assessments.length === 0 && <div className="text-center py-6 text-gray-500">No assessments created for your classes yet.</div>}
           </div>
         </div>
+        <ChatBot 
+          title="Assessments Assistant" 
+          context="You are helping an instructor manage course assessments. Answer questions about creating assessments, setting max marks, and grading."
+        />
       </div>
     </ProtectedPage>
   );

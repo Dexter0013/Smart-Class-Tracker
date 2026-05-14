@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import ProtectedPage from "@/components/ProtectedPage";
 import { useCurrentUser } from "@/lib/useCurrentUser";
+import ChatBot from "@/components/ChatBot";
 
 interface Assessment {
   id: string;
@@ -184,6 +185,10 @@ export default function InstructorMarksPage() {
             </div>
           )}
         </div>
+        <ChatBot 
+          title="Grading Assistant" 
+          context="You are helping an instructor assign marks and grades. Answer questions about grading scales, recording marks, and student performance."
+        />
       </div>
     </ProtectedPage>
   );

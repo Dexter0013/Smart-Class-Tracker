@@ -7,7 +7,7 @@
 - Next.js 16 with TypeScript & Tailwind CSS 4
 - MongoDB Atlas integration via Prisma ORM
 - JWT-based authentication with secure HTTP-only cookies
-- Middleware-based route protection ⭐ NEW
+- Proxy-based route protection ⭐ NEW
 - Responsive design with Tailwind CSS
 
 ### 2. **Admin Management System**
@@ -48,7 +48,7 @@ Created full CRUD pages and APIs for:
 
 ### 5. **🔒 Route Protection** ⭐ NEW
 
-- Middleware-based authentication on all protected routes
+- Proxy-based authentication on all protected routes
 - Auto-redirect unauthenticated users to home page
 - Role-based access control (ADMIN/STUDENT)
 - Protected routes can only be accessed after successful login
@@ -93,7 +93,7 @@ All with proper relationships and indexing for performance.
 - 🔐 Role-based access control (ADMIN, STUDENT)
 - 🔐 HTTP-only cookies for token storage
 - 🔐 Secure password hashing with bcryptjs
-- 🔐 Route protection middleware (auto-redirects on auth failure)
+- 🔐 Route protection proxy (auto-redirects on auth failure)
 - 🔐 JWT signature verification
 - 🔐 Protected API routes
 - 🔐 Auto-redirect authenticated users from login pages
@@ -111,6 +111,12 @@ All with proper relationships and indexing for performance.
 ### 11. **Zod API Validation** ⭐ NEW
 - Hard-coded server boundaries protecting MongoDB inserts with statically typed definitions (`lib/validations.ts`).
 - Centralized validation automatically casting native HTML string forms into numbers and nested Date objects prior to runtime Prisma operations.
+
+### 12. **Attendance Management System** ⭐ NEW
+- Centralized export functionality for attendance records (CSV/PDF).
+- Stabilized database integration bugs related to attendance tracking.
+- Implemented consistent loading UIs (spinners) across all profiles for better user experience.
+- Resolved syntax errors and removed dashboard redundancy in the student attendance portal.
 ---
 
 ## 📦 Tech Stack
@@ -137,7 +143,7 @@ All with proper relationships and indexing for performance.
 - JWT with jose library
 - bcryptjs for password hashing
 - Zod validation schema framework (`^4.x` parity)
-- Middleware-based route protection
+- Proxy-based route protection
 
 ---
 
@@ -163,10 +169,11 @@ erpsys-nextjs/
 │   │   ├── login/page.tsx (public)
 │   │   └── register/page.tsx (public)
 │   ├── instructor/
-│   │   ├── dashboard/page.tsx (protected)
-│   │   ├── enrollments/page.tsx (protected)
-│   │   ├── assessments/page.tsx (protected)
-│   │   ├── marks/page.tsx (protected)
+│   │   ├── dashboard/page.tsx (protected + chatbot)
+│   │   ├── enrollments/page.tsx (protected + chatbot)
+│   │   ├── assessments/page.tsx (protected + chatbot)
+│   │   ├── marks/page.tsx (protected + chatbot)
+│   │   ├── attendance/page.tsx (protected + chatbot)
 │   │   └── login/page.tsx (public)
 │   ├── api/
 │   │   ├── admin/ (20+ protected endpoints)
@@ -190,9 +197,7 @@ erpsys-nextjs/
 │   └── seed.ts
 ├── proxy.ts (⭐ Route protection)
 ├── .env.local (CREATE THIS)
-├── SETUP_GUIDE.md
-├── FILES_NEEDED.md
-└── DEPLOYMENT.md
+└── SETUP_GUIDE.md
 ```
 
 ---
@@ -314,22 +319,19 @@ npm run start
 
 ## 📖 Deployment Ready
 
-See `DEPLOYMENT.md` for complete deployment instructions including:
+This application can be deployed using the following services:
 
-- Vercel deployment (recommended)
-- Docker containerization
-- Railway setup
-- AWS EC2 deployment
-- Nginx configuration
-- PM2 process management
+- **Railway** (Recommended for full-stack Next.js with Prisma)
+- **Render** (Free tier available for web services)
+- **VPS with PM2** (AWS EC2, DigitalOcean, etc.)
+
+*Note: Deploying the full stack directly to Vercel may hit Serverless Function size limits due to Prisma engine size and 10-second timeouts for AI requests. Railway or a VPS is recommended.*
 
 ---
 
 ## 📝 Documentation
 
 - **SETUP_GUIDE.md** - Complete step-by-step setup instructions
-- **FILES_NEEDED.md** - Requirements checklist
-- **DEPLOYMENT.md** - Deployment guide
 
 ---
 
@@ -339,7 +341,7 @@ See `DEPLOYMENT.md` for complete deployment instructions including:
 | ---------------- | ---------------------- | -------------------- |
 | Model Source     | Local LM Studio        | Groq Cloud API       |
 | Chatbot Access   | Always visible         | Only after login     |
-| Route Protection | Manual checks          | Middleware-based     |
+| Route Protection | Manual checks          | Proxy-based          |
 | Setup Complexity | High                   | Low (just API key)   |
 | Performance      | Variable               | Optimized            |
 | Cost             | Free (local resources) | Free tier available  |
@@ -370,5 +372,5 @@ See `SETUP_GUIDE.md` for more troubleshooting.
 
 **Status:** 🟢 **PRODUCTION READY**
 
-**Last Updated:** April 22, 2026
-Version: 1.2.0 - Active API Validation & Secure Instructor Infrastructure Built
+**Last Updated:** May 14, 2026
+Version: 1.3.0 - Operationalized Attendance Export System & UI Consistency

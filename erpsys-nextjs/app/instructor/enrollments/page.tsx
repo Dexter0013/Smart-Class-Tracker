@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import ProtectedPage from "@/components/ProtectedPage";
 import { useCurrentUser } from "@/lib/useCurrentUser";
+import ChatBot from "@/components/ChatBot";
 
 interface Enrollment {
   id: string;
@@ -122,6 +123,10 @@ export default function InstructorEnrollmentsPage() {
             {enrollments.length === 0 && <div className="text-center py-6 text-gray-500">No students are currently enrolled in any of your classes.</div>}
           </div>
         </div>
+        <ChatBot 
+          title="Enrollments Assistant" 
+          context="You are helping an instructor view class enrollments. Answer questions about students, grading, and final ranks."
+        />
       </div>
     </ProtectedPage>
   );

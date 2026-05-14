@@ -7,7 +7,7 @@
 The application now enforces CORS restrictions on all API endpoints to prevent unauthorized cross-origin requests.
 
 ### How it works:
-- **Middleware** (`middleware.ts`) intercepts all API requests at `/api/*`
+- **Proxy** (`proxy.ts`) intercepts all API requests at `/api/*`
 - Only requests from **whitelisted origins** are allowed
 - **Preflight OPTIONS requests** are validated before processing
 
