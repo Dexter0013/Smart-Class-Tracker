@@ -1,102 +1,357 @@
-# ERP System Migration Summary
+# Smart Class Tracker - ERP System
 
-## ✅ Completed Components
+A comprehensive Educational Resource Planning (ERP) system built with Next.js, designed for managing students, instructors, courses, attendance, and assessments in an educational institution.
+
+## 📋 Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [API Endpoints](#api-endpoints)
+- [Database Schema](#database-schema)
+- [Security](#security)
+
+## ✨ Features
 
 ### 1. **Core Infrastructure**
 
-- Next.js 16 with TypeScript & Tailwind CSS 4
-- MongoDB Atlas integration via Prisma ORM
-- JWT-based authentication with secure HTTP-only cookies
-- Proxy-based route protection ⭐ NEW
-- Responsive design with Tailwind CSS
+- ⚡ Next.js 16 with TypeScript & Tailwind CSS 4
+- 🗄️ MongoDB Atlas integration via Prisma ORM
+- 🔐 JWT-based authentication with secure HTTP-only cookies
+- 🛡️ Proxy-based route protection with role-based access control
+- 📱 Responsive design with Tailwind CSS
+- 🎯 CORS-enabled API endpoints
 
 ### 2. **Admin Management System**
 
-Created full CRUD pages and APIs for:
+Complete CRUD operations for:
 
-- 👨‍🎓 **Students** - Create, read, update, delete students
-- 👨‍🏫 **Instructors** - Manage faculty members
-- 📚 **Courses** - Organize and manage courses
-- 🏢 **Departments** - Department administration
-- 📅 **Semesters** - Academic semester management
-- 📖 **Classes** - Class section management
+- 👨‍🎓 **Students** - Create, read, update, delete student records
+- 👨‍🏫 **Instructors** - Manage faculty members and their assignments
+- 📚 **Courses** - Organize and manage course catalog
+- 🏢 **Departments** - Department administration and HOD assignment
+- 📅 **Semesters** - Academic semester lifecycle management
+- 📖 **Classes** - Class section management and enrollment
+- 👥 **Users** - System-wide user account management
 
-### 3. **Student Portal**
+**Admin Dashboard** includes:
+- Master data management with full CRUD interfaces
+- Real-time statistics and analytics (`/api/admin/dashboard/stats`)
+- Data export functionality (CSV/Excel via `GET /api/admin/export`)
+- Dynamic API routes (`/api/admin/[table]/` and `/api/admin/[table]/[id]`)
 
-- Dashboard with enrolled courses (protected)
-- View grades and academic records (protected)
-- Personal profile management (protected)
-- Course catalog browsing (protected)
+### 3. **Instructor Portal**
 
-### 4. **Instructor Portal** ⭐ NEW
+- 📊 Dedicated Instructor Dashboard (`/instructor/dashboard`)
+- 📝 Assessment Management - Create and manage assessments for classes
+- 👥 Enrollment Tracking - View and track student enrollments
+- 📖 Class Management - Manage assigned classes and course content
+- ✏️ Grade Input - Enter and update student marks/grades
+- 📋 Attendance Management - Track and update class attendance
+- 📤 Data Export - Export class records and attendance data
 
-- Dedicated Dashboard for faculty members (`/instructor/dashboard`)
-- Enrollment tracking API context boundaries mapping specific classes
-- Dynamic Assessment creation endpoints scoped to instructor's classes
-- Student Grade input panels natively parsing legacy numeric markers
+**Instructor APIs:**
+- `POST /api/instructor/assessments` - Create assessments
+- `GET/PUT /api/instructor/assessments/[id]` - Manage assessments
+- `GET /api/instructor/classes` - View assigned classes
+- `GET/PUT /api/instructor/attendance` - Manage attendance
+- `POST /api/instructor/marks` - Record student marks
+- `GET /api/instructor/enrollments` - View class enrollments
 
-### 4. **🤖 Groq AI Chatbot Integration** ⭐ NEW
+### 4. **Student Portal**
 
-- Integrated **Groq API** for AI-powered assistant
-- Chatbot available **only after login** (admin/student dashboards)
-- Features:
-  - Real-time conversation
-  - Context-aware responses (Student/Admin modes)
-  - Chat history
-  - Clear chat functionality
-  - Timestamps for messages
+- 📊 Dashboard with enrolled courses (protected route)
+- 📈 View grades and academic records
+- 👤 Personal profile management
+- 📚 Course catalog browsing
+- 📍 Attendance tracking
+- 🎓 Academic progress overview
 
-### 5. **🔒 Route Protection** ⭐ NEW
+**Student APIs:**
+- `GET /api/student/profile` - Retrieve student profile
+- `GET /api/student/courses` - Enrolled courses
+- `GET /api/student/grades` - Academic grades
+- `GET /api/student/attendance` - Attendance records
+- `POST /api/student/register` - Student registration
 
-- Proxy-based authentication on all protected routes
-- Auto-redirect unauthenticated users to home page
-- Role-based access control (ADMIN/STUDENT)
-- Protected routes can only be accessed after successful login
-- Login form checks if already authenticated and redirects to dashboard
+### 5. **📞 Attendance Management System**
 
-### 6. **API Endpoints** (25+ APIs)
+- 📅 Attendance Calendar Component with visual representation
+- 📊 Attendance tracking per class and student
+- 🔄 Real-time attendance updates
+- 📋 Attendance records with timestamps
+- 📤 Attendance data export functionality
+- 🎯 Attendance queries by date range and class
 
-**Authentication:**
+**Attendance APIs:**
+- `GET /api/admin/attendance` - Retrieve all attendance records
+- `POST /api/instructor/attendance` - Mark attendance
+- `PUT /api/instructor/attendance/update` - Update attendance records
 
-- `POST /api/admin/login`
-- `POST /api/student/login`
-- `POST /api/student/register`
-- `POST /api/auth/logout`
+### 6. **📊 Assessment & Grading System**
 
-**Student APIs (Protected):**
+- 📝 Assessment creation with max marks configuration
+- ✏️ Student mark entry with validation
+- 📊 Grade tracking and calculation
+- 🏆 Performance analytics
+- 📈 Result distribution analysis
 
-- `GET /api/student/profile`
-- `GET /api/student/courses`
-- `GET /api/student/grades`
+**Assessment APIs:**
+- `POST /api/instructor/assessments` - Create assessment
+- `GET /api/instructor/assessments/[id]` - Get assessment details
+- `POST /api/instructor/marks` - Record student marks
 
-**Admin Management APIs (Protected):**
+### 7. **🤖 Groq AI Chatbot Integration**
 
-- CRUD operations for students, instructors, courses, departments, semesters, classes
-- Examples: `GET/POST /api/admin/[resource]`, `DELETE /api/admin/[resource]/[id]`
+- 🧠 AI-powered assistant using Groq API
+- 🔐 Authentication-required chatbot (admin/student/instructor dashboards)
+- 💬 Real-time conversation with context awareness
+- 📝 Chat history and conversation tracking
+- 🧹 Clear chat functionality
+- ⏰ Message timestamps
+- 🎯 Context-aware responses per user role
 
-**Chat API (Protected):**
+**Chat Features:**
+- Multi-role support (Admin, Student, Instructor)
+- Persistent chat history during session
+- AI-powered recommendations and assistance
+- Instant query resolution
 
-- `POST /api/chat` - AI-powered responses via Groq (requires auth)
+### 8. **🔒 Authentication & Authorization**
 
-### 7. **Database Schema**
+- 🔐 Role-based access control (ADMIN, STUDENT, INSTRUCTOR)
+- 🛡️ JWT token-based authentication
+- 🍪 Secure HTTP-only cookie storage
+- 🔑 Password hashing with bcryptjs
+- 📤 Auto-redirect for authenticated users
+- 📲 Login pages for each user role
+- 🚪 Logout functionality with token cleanup
+- 🔒 Protected API routes with middleware verification
 
-MongoDB collections with Prisma:
+**Login & Registration:**
+- `POST /api/admin/login` - Admin authentication
+- `POST /api/instructor/login` - Instructor authentication
+- `POST /api/student/login` - Student authentication
+- `POST /api/student/register` - Student self-registration
+- `POST /api/auth/logout` - Universal logout
 
-- User, Department, Student, Instructor
-- Semester, Course, Class, Enrollment
-- Assessment, StudentMark
+### 9. **🛡️ Route Protection**
 
-All with proper relationships and indexing for performance.
+- Proxy-based authentication middleware
+- Automatic redirect to login for unauthenticated access
+- Role-specific route enforcement
+- Token validation on protected routes
+- Seamless user experience with transparent redirects
 
-### 8. **Security Features**
+### 10. **📊 API Endpoints**
 
-- 🔐 Role-based access control (ADMIN, STUDENT)
-- 🔐 HTTP-only cookies for token storage
-- 🔐 Secure password hashing with bcryptjs
-- 🔐 Route protection proxy (auto-redirects on auth failure)
-- 🔐 JWT signature verification
-- 🔐 Protected API routes
-- 🔐 Auto-redirect authenticated users from login pages
+**35+ RESTful API endpoints** organized by domain:
+
+- **Authentication:** 4 endpoints (login, register, logout)
+- **Admin Management:** 15+ CRUD endpoints
+- **Instructor Features:** 10+ specialized endpoints
+- **Student Features:** 5+ endpoints
+- **Chat:** 1 AI-powered endpoint
+- **Export:** Data export to Excel/CSV
+
+### 11. **Database Schema**
+
+**MongoDB collections** with Prisma ORM:
+
+- **User** - System user accounts with role assignment
+- **Department** - Department records with HOD relationships
+- **Student** - Student records with enrollment tracking
+- **Instructor** - Faculty member records
+- **Semester** - Academic semester cycles
+- **Course** - Course catalog and information
+- **Class** - Class sections with instructor assignment
+- **Enrollment** - Student-Class relationships with grades
+- **Assessment** - Test/assignment definitions
+- **StudentMark** - Grade records per assessment
+- **Attendance** - Attendance sheet records
+- **AttendanceRecord** - Individual attendance entries
+
+All with proper foreign keys, relationships, and unique constraints for data integrity.
+
+### 12. **🌐 Admin Features**
+
+- 📊 Dashboard with real-time statistics
+- 🔍 Advanced data filtering and search
+- 📤 Bulk data export (Excel/CSV)
+- 👤 User account creation and management
+- 📋 System-wide data governance
+- 🎯 Analytics and reporting
+
+## Tech Stack
+
+### Frontend
+- **Framework:** Next.js 16.2.3
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS 4
+- **UI Components:** React 19.2.4
+
+### Backend
+- **Runtime:** Node.js (Next.js API Routes)
+- **Database:** MongoDB Atlas
+- **ORM:** Prisma 5.21.1
+- **Authentication:** JWT (jose 6.2.2)
+- **Password Hashing:** bcryptjs 3.0.3
+
+### External Services
+- **AI/Chat:** Groq API (groq-sdk 1.1.2)
+- **Data Export:** XLSX 0.18.5
+
+### Development Tools
+- **Build Tool:** Next.js
+- **Type Checking:** TypeScript 5
+- **Database CLI:** Prisma CLI
+- **Task Runner:** TSX 4.21.0
+- **Validation:** Zod 4.3.6
+
+## Project Structure
+
+```
+app/
+├── api/                    # API routes
+│   ├── admin/             # Admin endpoints
+│   ├── instructor/        # Instructor endpoints
+│   ├── student/           # Student endpoints
+│   ├── auth/              # Authentication endpoints
+│   └── chat/              # AI chatbot endpoint
+├── admin/                 # Admin dashboard pages
+├── instructor/            # Instructor portal pages
+├── student/               # Student portal pages
+└── [page/layout files]    # Root pages
+
+components/               # Reusable React components
+├── LoginForm.tsx
+├── Navbar.tsx
+├── AdminSidebar.tsx
+├── ChatBot.tsx
+├── AttendanceCalendar.tsx
+└── [other components]
+
+lib/                      # Utility functions & configurations
+├── auth.ts               # JWT & authentication utilities
+├── db.ts                 # Prisma client
+├── groq.ts               # Groq AI integration
+├── types.ts              # TypeScript type definitions
+├── validations.ts        # Input validation schemas
+└── [context files]       # API context providers
+
+prisma/
+├── schema.prisma         # Database schema
+└── seed.ts               # Database seeding script
+
+public/                   # Static assets
+
+scripts/                  # Utility scripts
+├── test_api.js
+├── simulate_attendance.js
+└── [other scripts]
+```
+
+## Security Features
+
+- 🔐 **Role-Based Access Control (RBAC)** - Three-tier permission system (Admin, Instructor, Student)
+- 🔐 **JWT Token Authentication** - Secure token-based session management
+- 🔐 **HTTP-Only Cookies** - XSS protection through secure cookie storage
+- 🔐 **Password Hashing** - Bcryptjs with salt for secure password storage
+- 🔐 **Route Protection Proxy** - Middleware for automatic authentication enforcement
+- 🔐 **JWT Signature Verification** - Token tampering prevention
+- 🔐 **Protected API Endpoints** - Authorization checks on all sensitive operations
+- 🔐 **CORS Configuration** - Cross-origin resource sharing restrictions
+- 🔐 **Automatic Redirects** - Seamless UX with transparent auth redirects
+
+## Getting Started
+
+### Prerequisites
+- Node.js 18+ and npm/yarn
+- MongoDB Atlas connection string
+- Groq API key (for chatbot functionality)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd erpsys-nextjs
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables**
+   Create `.env.local`:
+   ```
+   DATABASE_URL=your_mongodb_connection_string
+   GROQ_API_KEY=your_groq_api_key
+   JWT_SECRET=your_jwt_secret_key
+   ```
+
+4. **Setup the database**
+   ```bash
+   npm run db:push        # Push schema to MongoDB
+   npm run db:seed        # Seed initial data
+   ```
+
+5. **Run development server**
+   ```bash
+   npm run dev
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Available Scripts
+
+```bash
+npm run dev       # Start development server
+npm run build     # Build for production
+npm start         # Start production server
+npm run db:seed   # Seed database with sample data
+npm run db:push   # Push Prisma schema to database
+```
+
+## Usage
+
+### Admin Portal
+- Navigate to [http://localhost:3000/admin/login](http://localhost:3000/admin/login)
+- Manage students, instructors, courses, departments, semesters, and classes
+- View system analytics and export data
+
+### Instructor Portal
+- Navigate to [http://localhost:3000/instructor/login](http://localhost:3000/instructor/login)
+- Create and manage assessments
+- Track student enrollments and grades
+- Manage attendance records
+
+### Student Portal
+- Navigate to [http://localhost:3000/student/login](http://localhost:3000/student/login) or [http://localhost:3000/student/register](http://localhost:3000/student/register)
+- View enrolled courses and grades
+- Track attendance
+- Access AI-powered study assistant via chatbot
+
+## API Documentation
+
+All API endpoints require authentication (JWT token in HTTP-only cookies) except for login and registration endpoints.
+
+### Base URL
+```
+http://localhost:3000/api
+```
+
+### Response Format
+All responses follow standard JSON structure:
+```json
+{
+  "success": true/false,
+  "data": {},
+  "message": "optional message"
+}
+```
 
 ### 9. **Migrated System Credentials**
 
